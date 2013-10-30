@@ -9,12 +9,13 @@
 	diff = auto
 	branche = auto
 [alias]
-	co = checkout
+	ck = checkout
 	cm = commit -m
+	mg = merge --no-ff
 	br = branch
 	am = commit --amend -C HEAD
+	st = status
 	graph = log --graph --pretty=oneline
 	a = add .
-[merge]
-	ff = false
+	pk = cherry-pick
 
