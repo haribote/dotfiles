@@ -7,13 +7,13 @@
 	ui = auto
 	status = auto
 	diff = auto
-	branche = auto
+	branch = auto
 [alias]
 	ck = checkout
 	cm = commit -m
 	mg = merge --no-ff
 	br = branch
-	am = commit --amend -C HEAD
+	amend = commit --amend -C HEAD
 	st = status
 	graph = log --graph --pretty=oneline
 	a = add .
