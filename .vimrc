@@ -1,6 +1,6 @@
 "#####表示設定#####
 set title "編集中のファイル名を表示
-colorscheme molokai
+colorscheme hybrid
 syntax on "コードの色分け
 set tabstop=4 "インデントをスペース4つ分に設定
 set smartindent "オートインデント
