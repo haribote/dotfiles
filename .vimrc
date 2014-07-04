@@ -2,7 +2,8 @@
 set title "編集中のファイル名を表示
 colorscheme hybrid
 syntax on "コードの色分け
-set tabstop=4 "インデントをスペース4つ分に設定
+set tabstop=2 "インデントの幅
+set shiftwidth=2 "自動インデントの幅
 set smartindent "オートインデント
 
 "#####検索設定#####
@@ -14,7 +15,7 @@ set wrapscan "検索時に最後まで行ったら最初に戻る
 "" 基本的な設定
 "--------------------
 "新しい行のインデントを現在行と同じにする
-set autoindent 
+set autoindent
 "タブの代わりに空白文字を指定する
 set expandtab
 "インクリメンタルサーチを行う
