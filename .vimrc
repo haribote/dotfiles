@@ -32,9 +32,9 @@ set smarttab
 "" 基本的な設定
 "--------------------
 if has('vim_starting')
-        set nocompatible            " Be iMproved
-        " Required:
-        set runtimepath+=~/.vim/bundle/neobundle.vim/
+  set nocompatible            " Be iMproved
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 " Required:
 call neobundle#begin(expand('~/.vim/bundle'))
@@ -47,6 +47,10 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'bronson/vim-trailing-whitespace'
+NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'jiangmiao/simple-javascript-indenter'
+NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 call neobundle#end()
 " Required:
 filetype plugin indent on
