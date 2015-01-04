@@ -1,11 +1,11 @@
+[push]
+	default = simple
 [user]
 	name = KIMURA Tetsuro
 	email = haribote.nobody@gmail.com
 [core]
+	editor = vi
 	excludesfile = /Users/haribote/.gitignore_global
-	editor = vim
-[push]
-	default = simple
 [color]
 	ui = auto
 	status = auto
@@ -21,13 +21,26 @@
 	graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
 	a = add .
 	pk = cherry-pick
+[tig "bind"]
+	generic = g move-first-line
+	generic = G move-last-line
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
+[merge]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
+[diff]
+	tool = Kaleidoscope
 [difftool "sourcetree"]
 	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
-[tig "bind"]
-	generic = g move-first-line
-	generic = G move-last-line
 
