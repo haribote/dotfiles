@@ -1,1 +1,1 @@
-../molokai/colors/molokai.vim
+/Users/haribote/Environment/molokai/colors/molokai.vim
