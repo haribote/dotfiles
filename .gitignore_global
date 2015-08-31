@@ -1,5 +1,7 @@
 .DS_Store
-Thumbs.db
-.sass-cache
+thumbs.db
 .idea
+node_modules/
+bower_components/
+npm-debug.log
 
