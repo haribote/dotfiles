@@ -1,6 +1,11 @@
 # main view の左端にコミットIDを表示する
 set main-view = id date author:abbreviated commit-title:graph=yes,refs=yes
 
+# 自動リフレッシュを設定する
+set refresh-mode = auto
+set refresh-interval = 15
+
+# キーバインド: rebase
 bind main R !git rebase -i %(commit)
 bind diff R !git rebase -i %(commit)
 
