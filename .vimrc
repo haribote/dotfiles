@@ -3,11 +3,13 @@ set title
 set number
 set showmatch
 syntax on
-colorscheme molokai
-highlight Normal ctermbg=none
+" colorscheme molokai
+" colorscheme elflord
+colorscheme antares
+" highlight Normal ctermbg=none
 
 " indet
-set tabstop=4
+set tabstop=2
 set smartindent
 set autoindent
 "set smarttab
