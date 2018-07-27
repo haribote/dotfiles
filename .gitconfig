@@ -1,46 +1,17 @@
 [push]
-	default = simple
+        default = simple
 [user]
-	name = KIMURA Tetsuro
-	email = haribote.nobody@gmail.com
+        name = KIMURA Tetsuro
+        email = haribote.nobody@gmail.com
 [core]
-	editor = vi
+        editor = vi
 	excludesfile = /Users/haribote/.gitignore_global
+        autocrlf = input
 [color]
-	ui = auto
-	status = auto
-	diff = auto
-	branch = auto
-[alias]
-	ck = checkout
-	cm = commit -m
-	mg = merge --no-ff
-	br = branch
-	amend = commit --amend -C HEAD
-	st = status
-	graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
-	a = add .
-	pk = cherry-pick
-[tig "bind"]
-	generic = g move-first-line
-	generic = G move-last-line
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
-[merge]
-	tool = Kaleidoscope
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[difftool]
-	prompt = false
-[mergetool]
-	prompt = false
-[diff]
-	tool = Kaleidoscope
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+        ui = auto
+        status = auto
+        diff = auto
+        branch = auto
 
+[ghq]
+	root = /Users/haribote/Sites
