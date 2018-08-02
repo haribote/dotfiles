@@ -10,7 +10,10 @@ set -x PATH $PATH "$HOME/.anyenv/envs/pyenv/bin"
 set -x GHQ_SELECTOR peco
 
 function fish_user_key_bindings
+  # ghq
   bind \cg __ghq_crtl_g
+
+  # peco
   bind \cr 'peco_select_history (commandline -b)'
 end
 
