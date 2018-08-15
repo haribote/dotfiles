@@ -48,10 +48,14 @@ filetype plugin indent on    " required
 set title
 set number
 set showmatch
-syntax on
-" colorscheme molokai
+syntax enable
+set background=dark
+" colorscheme antares
 " colorscheme elflord
-colorscheme antares
+" colorscheme hybrid_material
+" colorscheme material-theme
+" colorscheme material
+" colorscheme molokai
 " highlight Normal ctermbg=none
 
 " indet
