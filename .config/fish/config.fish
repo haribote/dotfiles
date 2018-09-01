@@ -1,3 +1,6 @@
+set -x TERM xterm-256color
+set -g theme_color_scheme terminal-dark
+
 set -x PATH $HOME/.anyenv/bin $PATH
 
 set -x NDENV_ROOT $HOME/.anyenv/envs/ndenv
