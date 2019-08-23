@@ -109,10 +109,9 @@ bind generic -      ?git switch -
 bind main    T ?git tag "%(prompt Enter tag name: )" %(commit)
 bind refs    T ?git tag "%(prompt Enter tag name: )" %(branch)
 
-# B でブランチを作成してそのブランチに移動 (checkout -b)
-bind main    B      ?git checkout -b "%(prompt Enter branch name: )" %(branch)
-bind refs    B      ?git checkout -b "%(prompt Enter branch name: )" %(branch)
-bind main    <Esc>b ?git checkout -b "%(prompt Enter branch name: )" %(commit)
+# B でブランチを作成してそのブランチに移動 (switch -c)
+bind main    B      ?git switch -c "%(prompt Enter branch name: )"
+bind refs    B      ?git switch -c "%(prompt Enter branch name: )" %(branch)
 
 # M で merge
 bind main    M      ?git merge %(branch)
