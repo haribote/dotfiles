@@ -102,8 +102,8 @@ bind diff    K      ?git cherry-pick %(commit)
 bind main    =      ?git restore %(commit)
 bind refs    =      ?git switch %(branch)
 
-# - で直前のブランチに戻る (checkout -)
-bind generic -      ?git checkout -
+# - で直前のブランチに戻る (switch -)
+bind generic -      ?git switch -
 
 # T で tag
 bind main    T ?git tag "%(prompt Enter tag name: )" %(commit)
