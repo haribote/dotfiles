@@ -98,10 +98,9 @@ bind diff    K      ?git cherry-pick %(commit)
 
 ## 以下、Shift付きでブランチ指定、Alt付きでコミットID指定のコマンド
 
-# = で checkout
-bind main    =      ?git checkout %(branch)
-bind refs    =      ?git checkout %(branch)
-bind main    <Esc>= ?git checkout %(commit)
+# = で restore / switch
+bind main    =      ?git restore %(commit)
+bind refs    =      ?git switch %(branch)
 
 # - で直前のブランチに戻る (checkout -)
 bind generic -      ?git checkout -
