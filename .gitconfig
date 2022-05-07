@@ -5,7 +5,7 @@
         email = haribote.nobody@gmail.com
 [core]
         editor = vi
-	excludesfile = /Users/haribote/.gitignore_global
+	excludesfile = ~/.gitignore_global
         autocrlf = input
 [color]
         ui = auto
@@ -14,4 +14,4 @@
         branch = auto
 
 [ghq]
-	root = /Users/haribote/Sites
+	root = ~/Sites
