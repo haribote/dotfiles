@@ -1,3 +1,5 @@
-.config/configstore
-.vim/bundle
+# fish が自動生成・更新するマシン固有の universal variables
+.config/fish/fish_variables
 
+# gh の認証トークンを含むため追跡しない（config.yml のみ管理）
+.config/gh/hosts.yml

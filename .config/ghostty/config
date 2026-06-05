@@ -1,0 +1,23 @@
+# Window
+fullscreen = true
+macos-non-native-fullscreen = false
+
+# Skin
+theme = Material Design Colors
+background-opacity = 0.85
+background-blur = macos-glass-regular
+font-family = "UDEV Gothic NF"
+font-size = 16
+window-padding-x = 8
+
+# Keybinds
+## Cmd+T で tmux のプレフィックス Ctrl+A に続けて Ctrl+T を送る
+keybind = cmd+t=text:\x01\x14
+# Cmd+Shift+T で tmux のプレフィックス Ctrl+A に続けて Ctrl+Shift+T を送る
+# Ctrl+Shift+T は CSI u 形式 (ESC[116;6u) で送信（要 extended-keys）
+keybind = cmd+shift+t=text:\x01\x1b[116;6u
+# Cmd+] / cmd+[ で tmux のプレフィックス(Ctrl+a)+ n/p を送りペインを番号順に次/前へ移動する
+keybind = cmd+]=text:\x01n
+keybind = cmd+[=text:\x01p
+# Cmd+W で tmux のプレフィックス(Ctrl+a)+ x を送りカレントペーンを閉じる（確認プロンプト y/n あり）
+keybind = cmd+w=text:\x01x
