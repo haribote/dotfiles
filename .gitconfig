@@ -1,17 +1,53 @@
 [push]
-        default = simple
+	default = simple
 [user]
-        name = KIMURA Tetsuro
-        email = haribote.nobody@gmail.com
+	name = KIMURA Tetsuro
+	email = haribote.nobody@gmail.com
 [core]
-        editor = vi
-	excludesfile = /Users/haribote/.gitignore_global
-        autocrlf = input
+	editor = vi
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+	pager = delta
 [color]
-        ui = auto
-        status = auto
-        diff = auto
-        branch = auto
-
+	ui = auto
+	status = auto
+	diff = auto
+	branch = auto
 [ghq]
-	root = /Users/haribote/Sites
+	root = ~/Sites
+
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	line-numbers = true
+	side-by-side = false
+[merge]
+	conflictStyle = zdiff3
+[init]
+	defaultBranch = main
+[pull]
+	ff = only
+[fetch]
+	prune = true
+[rebase]
+	autostash = true
+[rerere]
+	enabled = true
+[commit]
+	verbose = true
+[diff]
+	colorMoved = default
+[branch]
+	sort = -committerdate
+[column]
+	ui = auto
+[alias]
+	st = status -sb
+	co = checkout
+	sw = switch
+	br = branch
+	lg = log --oneline --graph --decorate --all
+	last = log -1 HEAD --stat
+	unstage = restore --staged
+	amend = commit --amend --no-edit
