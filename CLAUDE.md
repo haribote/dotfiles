@@ -23,6 +23,7 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
 - **git** (`.gitconfig`, `.gitignore_global`)
 - **zsh** (`.zprofile`, `.zshrc`): fish へ移行する前のログインシェル設定（brew shellenv / PATH のみ）。
 - **Homebrew** (`.Brewfile`): インストール済みの CLI ツール・GUI アプリ・フォントの一覧（`brew bundle --global` の既定パス `~/.Brewfile` のミラー）。`brew bundle dump --describe --no-vscode` で再生成する。VS Code 拡張は意図的に含めない。
+- **Claude Code** (`.claude/CLAUDE.md`, `.claude/settings.json`): グローバル個人設定とエディタ設定（テーマ・permissions allowlist・Stop フック）のみ。会話ログ・キャッシュ・セッション・`settings.local.json` 等のマシン固有/機密データは `.gitignore` の whitelist で除外している（`.claude/*` を無視し 2 ファイルだけ許可）。
 
 ## ブートストラップ（新しい Mac での再現手順）
 

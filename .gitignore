@@ -3,3 +3,10 @@
 
 # gh の認証トークンを含むため追跡しない（config.yml のみ管理）
 .config/gh/hosts.yml
+
+# Claude Code 設定は CLAUDE.md と settings.json だけを追跡する。
+# 会話ログ・キャッシュ・セッション等のマシン固有/機密データ（projects, history,
+# sessions, file-history, backups, plans, cache, plugins, settings.local.json 等）は除外する。
+.claude/*
+!.claude/CLAUDE.md
+!.claude/settings.json
