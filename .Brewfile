@@ -1,3 +1,4 @@
+tap "k1low/tap"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Modern, maintained replacement for ls
@@ -24,6 +25,8 @@ brew "starship"
 brew "tig"
 # Terminal multiplexer
 brew "tmux"
+# A Git subcommand that makes `git worktree` simple
+brew "k1low/tap/git-wt"
 cask "font-udev-gothic"
 cask "font-udev-gothic-nf"
 # Terminal emulator that uses platform-native UI and GPU acceleration
@@ -32,3 +35,4 @@ cask "ghostty"
 cask "raycast"
 # Open-source code editor
 cask "visual-studio-code"
+npm "corepack"

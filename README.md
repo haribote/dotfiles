@@ -8,7 +8,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 
 | 対象 | パス | 概要 |
 | --- | --- | --- |
-| **fish** | `.config/fish/` | starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動 / Ctrl-G ghq）、起動時の tmux 自動アタッチ（`main` セッション。tmux 内・VSCode 内は除外）、nodenv 初期化。`conf.d/` に fzf 関連キーバインド、`functions/` に `ghq_fzf` と eza ラッパ（`ll`/`ls`）。プラグインマネージャは未使用。 |
+| **fish** | `.config/fish/` | starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動 / Ctrl-G ghq）、git-wt 統合（`git wt <branch>` で worktree 切替 cd・補完）、起動時の tmux 自動アタッチ（`main` セッション。tmux 内・VSCode 内は除外）、nodenv 初期化。`conf.d/` に fzf 関連キーバインド、`functions/` に `ghq_fzf` と eza ラッパ（`ll`/`ls`）。プラグインマネージャは未使用。 |
 | **tmux** | `.tmux.conf` | tmux 3.6+ 前提。prefix は `Ctrl-a`。ghostty 連携のため CSI u 拡張キーや truecolor を明示設定。 |
 | **ghostty** | `.config/ghostty/config` | フォント `UDEV Gothic NF`、テーマ `Material Design Colors`。Cmd 系キーを tmux のプレフィックスシーケンスに変換するキーバインドを持つ。 |
 | **starship** | `.config/starship.toml` | 2 行構成プロンプト。Nerd Font グリフ前提。 |
@@ -17,7 +17,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 | **git** | `.gitconfig`, `.gitignore_global` | delta pager・alias 等。`user.email` は公開用ダミー。 |
 | **zsh** | `.zprofile`, `.zshrc` | fish 移行前のログインシェル設定（brew shellenv / PATH のみ）。 |
 | **Homebrew** | `.Brewfile` | インストール済み CLI ツール・GUI アプリ・フォントの一覧（`~/.Brewfile` のミラー）。VS Code 拡張は意図的に含めない。 |
-| **Claude Code** | `.claude/` | グローバル個人設定（`CLAUDE.md`）とエディタ設定（`settings.json`）のみ。会話ログ・キャッシュ・セッション等のマシン固有/機密データは除外。 |
+| **Claude Code** | `.claude/` | グローバル個人設定（`CLAUDE.md`）・エディタ設定（`settings.json`）・サブエージェント（`agents/`）・skills（`skills/`）を追跡。会話ログ・キャッシュ・セッション等のマシン固有/機密データは除外。 |
 
 ## ブートストラップ（新しい Mac での再現手順）
 
@@ -39,7 +39,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 
 ## 依存コマンド
 
-`starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `nodenv`, `tmux`。
+`starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `nodenv`, `tmux`, `git-wt`。
 
 いずれも `.Brewfile` に含まれる。未インストールでも該当機能が無効になるだけで、致命的には壊れない作りにしてある。
 

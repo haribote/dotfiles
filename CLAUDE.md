@@ -11,7 +11,7 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
 ## 構成
 
 - **fish** (`.config/fish/`)
-  - `config.fish`: starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動）、起動時の tmux 自動アタッチ（`main` セッション。tmux 内・VSCode 内は除外）、nodenv 初期化。
+  - `config.fish`: starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動）、git-wt 統合（`git wt --init fish`。`if type -q git-wt` ガード付きで未インストール時は no-op）、起動時の tmux 自動アタッチ（`main` セッション。tmux 内・VSCode 内は除外）、nodenv 初期化。
   - `conf.d/`: fzf 関連のキーバインド（`fzf_cd_keybind`=Ctrl-O, `fzf_tab_complete`=Tab, `ghq_fzf_keybind`=Ctrl-G）。`config.fish` の `fzf --fish` で定義される widget に bind しているため、読み込み順序に依存する。
   - `functions/`: `ghq_fzf`（ghq リポジトリを fzf 選択して cd）、`ll`/`ls`（eza ラッパ）。
   - プラグインマネージャは使っていない（旧 fisherman 構成は廃止）。
@@ -23,7 +23,7 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
 - **git** (`.gitconfig`, `.gitignore_global`)
 - **zsh** (`.zprofile`, `.zshrc`): fish へ移行する前のログインシェル設定（brew shellenv / PATH のみ）。
 - **Homebrew** (`.Brewfile`): インストール済みの CLI ツール・GUI アプリ・フォントの一覧（`brew bundle --global` の既定パス `~/.Brewfile` のミラー）。`brew bundle dump --describe --no-vscode` で再生成する。VS Code 拡張は意図的に含めない。
-- **Claude Code** (`.claude/CLAUDE.md`, `.claude/settings.json`): グローバル個人設定とエディタ設定（テーマ・permissions allowlist・Stop フック）のみ。会話ログ・キャッシュ・セッション・`settings.local.json` 等のマシン固有/機密データは `.gitignore` の whitelist で除外している（`.claude/*` を無視し 2 ファイルだけ許可）。
+- **Claude Code** (`.claude/`): グローバル個人設定 (`CLAUDE.md`)・エディタ設定 (`settings.json`: permissions allowlist・Stop フック)・サブエージェント (`agents/`: `code-critic`, `tdd-expert`)・skills (`skills/`: `five-whys`, `pr-lifecycle`, `worktree`, `address-pr-review`, `call-code-critic`, `critic-design-review`, `critic-implementation-review`) を追跡する。会話ログ・キャッシュ・セッション・`settings.local.json` 等のマシン固有/機密データは `.gitignore` の whitelist で除外している（`.claude/*` を無視し、上記の許可エントリ＝ `CLAUDE.md` / `settings.json` / `agents/` / `skills/` だけを再 include）。`address-pr-review/fetch-unresolved-threads.sh` は実行ビット付き（`100755`）で追跡する。
 
 ## ブートストラップ（新しい Mac での再現手順）
 
@@ -37,7 +37,7 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
 ## 横断的な約束ごと
 
 - 配色は ghostty テーマ **"Material Design Colors"** に統一されている。fish の `FZF_*` 配色、`.tmux.conf` のステータスライン、`starship.toml` が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 3 箇所を揃える。
-- 依存コマンド: `starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `nodenv`, `tmux`。未インストールでも該当機能が無効になるだけで致命的には壊れない作りにしてある。
+- 依存コマンド: `starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `nodenv`, `tmux`, `git-wt`。未インストールでも該当機能が無効になるだけで致命的には壊れない作りにしてある。
 
 ## 注意点
 
