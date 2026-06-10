@@ -1,6 +1,9 @@
 # Window
-fullscreen = true
 macos-non-native-fullscreen = false
+window-decoration = auto
+window-height = 45
+window-width = 160
+window-padding-x = 8
 
 # Skin
 theme = Material Design Colors
@@ -8,7 +11,6 @@ background-opacity = 0.85
 background-blur = macos-glass-regular
 font-family = "UDEV Gothic NF"
 font-size = 16
-window-padding-x = 8
 
 # Keybinds
 ## Cmd+T で tmux のプレフィックス Ctrl+A に続けて Ctrl+T を送る
