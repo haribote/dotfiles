@@ -11,12 +11,12 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
 ## 構成
 
 - **fish** (`.config/fish/`)
-  - `config.fish`: starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動）、git-wt 統合（`git wt --init fish`。`if type -q git-wt` ガード付きで未インストール時は no-op）、起動時の tmux 自動アタッチ（`main` セッション。tmux 内・VSCode 内は除外）、nodenv 初期化。
+  - `config.fish`: starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動）、git-wt 統合（`git wt --init fish`。`if type -q git-wt` ガード付きで未インストール時は no-op）、起動時の tmux セッション方針（tmux 内・VSCode 内は除外。`main` が他ウィンドウで使用中＝クライアント接続済みなら独立セッション `win-<pid>` を作り、`client-attached` フックで `destroy-unattached on` を貼って閉じたら自動破棄。未使用時は `main` に attach＝無ければ作成）、nodenv 初期化。
   - `conf.d/`: fzf 関連のキーバインド（`fzf_cd_keybind`=Ctrl-O, `fzf_tab_complete`=Tab, `ghq_fzf_keybind`=Ctrl-G）。`config.fish` の `fzf --fish` で定義される widget に bind しているため、読み込み順序に依存する。
   - `functions/`: `ghq_fzf`（ghq リポジトリを fzf 選択して cd）、`ll`/`ls`（eza ラッパ）。
   - プラグインマネージャは使っていない（旧 fisherman 構成は廃止）。
 - **tmux** (`.tmux.conf`): tmux 3.6+ 前提。prefix は Ctrl-a。ghostty 連携のため CSI u 拡張キーや truecolor を明示設定。
-- **ghostty** (`.config/ghostty/config`): フォント `UDEV Gothic NF`、テーマ `Material Design Colors`。Cmd 系キーを tmux のプレフィックスシーケンスに変換するキーバインドを持つ（`.tmux.conf` のバインドと対で機能する）。
+- **ghostty** (`.config/ghostty/config`): フォント `UDEV Gothic NF`、テーマ `Material Design Colors`。Cmd 系キーを tmux のプレフィックスシーケンスに変換するキーバインドを持つ（`.tmux.conf` のバインドと対で機能する）。Cmd 系＝ペイン操作（分割・移動・閉じる）、Cmd+Shift 系＝ウィンドウ操作（新規 `Cmd+N`／前後切替）、`Cmd+Shift+N` のみ ghostty ネイティブの新規ウィンドウ。
 - **starship** (`.config/starship.toml`): 2 行構成プロンプト。Nerd Font グリフ前提。
 - **tig** (`.tigrc`): git 操作を tig 上で完結させる大量のカスタムキーバインド。差分表示に **delta**、GitHub 連携（`;` `w`）に **gh** を使う。
 - **gh** (`.config/gh/config.yml`): 設定のみ。認証情報 (`hosts.yml`) は `.gitignore` で除外。

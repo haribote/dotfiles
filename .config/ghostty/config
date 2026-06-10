@@ -13,13 +13,27 @@ font-family = "UDEV Gothic NF"
 font-size = 16
 
 # Keybinds
-## Cmd+T で tmux のプレフィックス Ctrl+A に続けて Ctrl+T を送る
+# tmux への橋渡し。Cmd 系 = ペイン操作 / Cmd+Shift 系 = ウィンドウ操作。
+# いずれもプレフィックス Ctrl+a (\x01) に続けてキーを送る。
+
+## ── ペイン操作 ──
+# Cmd+T        : 横分割（prefix + Ctrl+T）
 keybind = cmd+t=text:\x01\x14
-# Cmd+Shift+T で tmux のプレフィックス Ctrl+A に続けて Ctrl+Shift+T を送る
-# Ctrl+Shift+T は CSI u 形式 (ESC[116;6u) で送信（要 extended-keys）
+# Cmd+Shift+T  : 縦分割（prefix + Ctrl+Shift+T を CSI u 形式 ESC[116;6u で送信。要 extended-keys）
 keybind = cmd+shift+t=text:\x01\x1b[116;6u
-# Cmd+] / cmd+[ で tmux のプレフィックス(Ctrl+a)+ n/p を送りペインを番号順に次/前へ移動する
+# Cmd+] / Cmd+[: ペインを番号順に次/前へ移動（prefix + n/p）
 keybind = cmd+]=text:\x01n
 keybind = cmd+[=text:\x01p
-# Cmd+W で tmux のプレフィックス(Ctrl+a)+ x を送りカレントペーンを閉じる（確認プロンプト y/n あり）
+# Cmd+W        : カレントペインを閉じる（prefix + x。確認プロンプト y/n あり）
 keybind = cmd+w=text:\x01x
+
+## ── ウィンドウ操作 ──
+# Cmd+N              : 新規ウィンドウ作成（prefix + c）
+keybind = cmd+n=text:\x01c
+# Cmd+Shift+[ / ]    : ウィンドウを前/次へ切替（S-Left / S-Right を送信。tmux 側 bind -n に対応）
+keybind = cmd+shift+[=text:\x1b[1;2D
+keybind = cmd+shift+]=text:\x1b[1;2C
+
+## ── ghostty ネイティブ操作 ──
+# Cmd+Shift+N  : ghostty の新規ウィンドウ（Cmd+N は tmux ウィンドウ作成に割当済みのため代替）
+keybind = cmd+shift+n=new_window
