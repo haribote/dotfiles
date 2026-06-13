@@ -37,11 +37,7 @@ git checkout -b <branch-name>
 
 #### 3. コミット
 
-- リポジトリ固有のコミットルール（CONTRIBUTING.md, .gitmessage等）を優先する
-- ルールがなければConventional Commits形式を使用する
-  - Types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `style`, `perf`
-  - Format: `type(scope): description`
-- AI co-author credits は含めない
+- コミットメッセージは `/commit` skill の規約に従う（Conventional Commits 形式・subject 規約・絵文字禁止・AI co-author credits 不含・リポジトリ固有ルール優先）。
 
 ```bash
 git add .

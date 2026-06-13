@@ -34,10 +34,7 @@
 
 ## TypeScript / JavaScript
 
-- 公開オブジェクト型は `interface`、ユニオン/ユーティリティ型は `type` を使う。
-- `const` を優先する。`any` は禁止し、`unknown` + 型の絞り込みで対応する。
-- フォーマッタは **Prettier**、Linter は **ESLint** に従う。
-- import 順序は 標準 → 外部 → 内部 とし、相対パスは最小限にする。
+- TypeScript / JavaScript の規約は `typescript-conventions` skill に従う。
 
 ## ツールの優先方針
 
@@ -49,9 +46,4 @@
 
 ## コミット規約
 
-- **Conventional Commits** 形式に従う: `<type>(<scope>): <subject>`
-- 主な type: `feat`（新機能）, `fix`（バグ修正）, `docs`, `style`, `refactor`, `test`, `chore`, `perf`
-- subject は**英語**・命令形・小文字始まり・末尾ピリオドなし。件名は 50〜72 文字以内を目安にする。
-- 破壊的変更は `feat!:` のように `!` を付けるか、フッターに `BREAKING CHANGE:` を書く。
-- **絵文字は使わない**。
-- 作業が一区切りしたら commit を**提案する**が、実行はユーザーの確認後に行う（勝手に commit しない）。
+- コミット規約は `commit` skill に従う。
