@@ -38,6 +38,8 @@ gh pr view <NUMBER> --json reviewRequests,reviews,reviewDecision,state,headRefNa
 - `reviewDecision`: `APPROVED` / `CHANGES_REQUESTED` / `REVIEW_REQUIRED`
 - `state`: `OPEN` / `CLOSED` / `MERGED`
 
+状態判定（`reviewDecision` / `state` / `reviewRequests`）に必要なフィールドだけを参照する。`reviews` のレビュー本文は大きい場合があるため、本文全体の精読は避ける（未解決コメントは手順2で取得する）。
+
 未提出レビュアーの扱い:
 - **Copilot**: 常に待機する。Copilotのレビューが届くまで次のステップに進まない。
 - **それ以外**: ユーザーに **待機するか続行するか** 確認する。勝手に判断しない。
@@ -54,6 +56,11 @@ gh pr view <NUMBER> --json reviewRequests,reviews,reviewDecision,state,headRefNa
 
 出力: 未解決スレッド(`isResolved == false`)のみのJSON配列。各要素は `threadId`, `outdated`, `path`, `line`, `firstComment`, `replies` を含む。`outdated: true` のスレッドも含まれるが、コード変更済みのため対応不要の可能性が高い。内容は確認すること。
 
+コンテキスト予算:
+
+- **context-mode あり**: スクリプトを `ctx_execute`(language: "shell") 経由で実行し、コンパクトな index（`threadId` / `path` / `line` / `outdated` / firstComment の author と先頭1行 / reply 数）だけを出力させる。各スレッドの本文は手順4で対象になったとき `ctx_search` で引く。全文 JSON をコンテキストに入れない。
+- **無し**: スクリプトを直接実行する（出力は既に未解決のみ・コメント上限10件に絞られている）。
+
 ### 3. PRブランチをチェックアウト
 
 ```bash
@@ -64,7 +71,7 @@ gh pr checkout <NUMBER>
 
 未解決スレッドごとに以下を実行:
 
-1. **該当コードを読む**: `path` と `line` から対象ファイル・行を確認
+1. **該当コードを読む**: `path` と `line` を使い、Read の offset/limit で当該行の周辺（目安 ±30 行）だけ読む。ファイル全体を読まない。広い文脈が要るときだけ範囲を広げる
 2. **指摘を評価**: 以下の基準で判断
 
 **修正する:**

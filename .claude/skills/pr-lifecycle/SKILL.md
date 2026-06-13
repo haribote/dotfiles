@@ -11,6 +11,13 @@ PRのライフサイクルをゲート付きで管理する。各ステップに
 
 `$ARGUMENTS` でフェーズを指定できる: `create`, `review`, `merge`。省略時は現在のPR状態を判定して適切なフェーズから開始する。
 
+## コンテキスト予算
+
+生コマンド出力をそのままコンテキストに流さない。
+
+- diff・JSON・チェック結果は、まず `--stat` 等の要約形を見る。全文が要るときだけ対象を絞って取得する。
+- 大きい出力（full diff、レビュースレッド JSON）は context-mode（`ctx_execute` / `ctx_batch_execute`）で digest 化し、要約だけ受け取る。context-mode が無ければ対象を絞った取得で代替する。
+
 ## Phase 1: Create（PR作成）
 
 ### ゲート条件
@@ -22,10 +29,15 @@ PRのライフサイクルをゲート付きで管理する。各ステップに
 #### 1. 状況把握
 
 ```bash
-git status
+git status --short
 git rev-parse --abbrev-ref HEAD
-git diff HEAD
+git diff --stat HEAD
 ```
+
+`--stat` で変更の形（ファイル・増減行）を把握する。commit message / PR body を書くのに意味的内容が要る場合:
+
+- **context-mode あり**: `git diff HEAD` を `ctx_execute`(language: "shell") に流し、digest（per-file の hunk header `@@`、追加/削除された関数・見出し行、代表 hunk）だけを `console.log` で受け取る。生 diff はサンドボックスに留まる。
+- **無し**: 変更ファイルごとに `git diff HEAD -- <path>` を必要な分だけ読む。全ファイルを一括 `git diff HEAD` しない。
 
 #### 2. ブランチ作成（必要な場合）
 
