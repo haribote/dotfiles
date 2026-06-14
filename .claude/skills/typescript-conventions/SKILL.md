@@ -1,6 +1,6 @@
 ---
 name: typescript-conventions
-description: "TypeScript / JavaScript のコードを書く・レビューする・リファクタする時に使う。型定義（公開オブジェクト型は interface、ユニオン/ユーティリティ型は type）、const 優先・any 禁止（unknown + 絞り込み）、Prettier/ESLint 準拠、import 順序（標準→外部→内部・相対パス最小化）を適用する。.ts/.tsx/.js/.jsx ファイルの編集時に発動する。"
+description: "TypeScript / JavaScript のコードを書く・レビューする・リファクタする時に使う。型定義（公開オブジェクト型は interface、ユニオン/ユーティリティ型は type）、const 優先・any 禁止（unknown + 絞り込み）、Biome 準拠（デフォルト、フォールバックは Prettier/ESLint）、import 順序（標準→外部→内部・相対パス最小化）を適用する。.ts/.tsx/.js/.jsx ファイルの編集時に発動する。"
 user-invocable: true
 ---
 
@@ -41,7 +41,11 @@ function parse(input: unknown): User {
 
 ## フォーマッタ / Linter
 
-- フォーマッタは **Prettier**、Linter は **ESLint** に従う。保存時整形を前提にし、手動整形しない。
+- **デフォルトは Biome**。formatter と linter を単一ツール・単一設定（`biome.json`）で兼ねる。新規プロジェクトではまず Biome を選ぶ。
+- **フォールバックは Prettier（フォーマッタ）+ ESLint（Linter）**。次の場合に切り替える。
+  - 既存プロジェクトが Prettier/ESLint を採用している（「既存コードに合わせる」原則を優先）。
+  - フレームワーク固有の ESLint プラグインや、Biome が未対応・カバー不足の Lint ルール（高度な type-aware ルール等）が必要。
+- いずれの場合も保存時整形を前提にし、手動整形しない。
 
 ## import 順序
 
