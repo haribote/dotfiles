@@ -1,3 +1,9 @@
+# Homebrew を PATH 先頭へ（/usr/bin の Apple git より優先させる）
+# --path: PATH を直接操作。永続しないので config.fish 側で毎起動設定する
+if test -x /opt/homebrew/bin/brew
+    fish_add_path --path --move --prepend /opt/homebrew/bin /opt/homebrew/sbin
+end
+
 if status is-interactive
 # Commands to run in interactive sessions can go here
 
