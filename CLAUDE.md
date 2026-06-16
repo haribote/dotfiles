@@ -23,7 +23,7 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
 - **git** (`.gitconfig`, `.gitignore_global`)
 - **zsh** (`.zprofile`, `.zshrc`): fish へ移行する前のログインシェル設定（brew shellenv / PATH のみ）。
 - **Homebrew** (`.Brewfile`): インストール済みの CLI ツール・GUI アプリ・フォントの一覧（`brew bundle --global` の既定パス `~/.Brewfile` のミラー）。`brew bundle dump --describe --no-vscode` で再生成する。VS Code 拡張は意図的に含めない。
-- **Claude Code** (`.claude/`): グローバル個人設定 (`CLAUDE.md`)・エディタ設定 (`settings.json`: permissions allowlist・Stop フック)・サブエージェント (`agents/`: `tdd-expert`)・skills (`skills/`: `five-whys`, `commit`, `pr-lifecycle`, `worktree`, `typescript-conventions`) を追跡する。会話ログ・キャッシュ・セッション・`settings.local.json` 等のマシン固有/機密データは `.gitignore` の whitelist で除外している（`.claude/*` を無視し、上記の許可エントリ＝ `CLAUDE.md` / `settings.json` / `agents/` / `skills/` だけを再 include）。
+- **Claude Code** (`.claude/`): グローバル個人設定 (`CLAUDE.md`)・エディタ設定 (`settings.json`: permissions allowlist・Stop フック)・サブエージェント (`agents/`: `tdd-expert`)・skills (`skills/`: `five-whys`, `commit`, `pr-lifecycle`, `worktree`, `typescript-conventions`) を追跡する。会話ログ・キャッシュ・セッション・`settings.local.json` 等のマシン固有/機密データは `.gitignore` の whitelist で除外している（`.claude/*` を無視し、`CLAUDE.md` / `settings.json` を再 include。`agents/` と `skills/` はディレクトリ全体ではなく、宣言済みの個別エントリ＝ `tdd-expert` と上記5 skill だけを per-entry で再 include する。これによりプラグインや手動インストールで入ったサードパーティ製の skill / agent は自動的に追跡対象外になる）。
 
 ## ブートストラップ（新しい Mac での再現手順）
 
