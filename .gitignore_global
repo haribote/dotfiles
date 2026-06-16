@@ -3,4 +3,4 @@ thumbs.db
 .idea/
 node_modules/
 npm-debug.log
-
+**/.claude/settings.local.json
