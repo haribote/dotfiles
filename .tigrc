@@ -17,7 +17,7 @@ set diff-options = -m --first-parent
 set refresh-mode = auto
 
 # 差分表示に delta を使う (要 delta インストール. --color-only で +/- 行構造を保持)
-set diff-highlight = delta --color-only
+set diff-highlight = "delta --color-only"
 
 # デフォルトの bind generic G !git gc を無効化する
 bind generic G none
