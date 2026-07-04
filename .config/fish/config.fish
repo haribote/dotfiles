@@ -45,21 +45,9 @@ if type -q fzf
     fzf --fish | source
 end
 
-# 起動時に tmux を自動で立ち上げる（tmux 内・VSCode 内では除く）
-if type -q tmux; and test -z "$TMUX"; and test "$TERM_PROGRAM" != vscode
-    # main が既に他のウィンドウで使用中（クライアント接続済み）なら独立した新規セッション、
-    # そうでなければ "main" にアタッチ（無ければ作成）
-    if tmux has-session -t main 2>/dev/null; and test (tmux list-clients -t main 2>/dev/null | count) -gt 0
-        # 独立セッション。ウィンドウを閉じて detach したら自動破棄し、溜めない。
-        # 注: destroy-unattached は未アタッチのセッションに設定した瞬間に破棄されるため、
-        # client-attached フックでアタッチ後に有効化する（main には影響させない）。
-        set -l sname win-$fish_pid
-        tmux new-session -d -s $sname
-        tmux set-hook -t $sname client-attached "set-option -t $sname destroy-unattached on"
-        exec tmux attach -t $sname
-    else
-        exec tmux new-session -A -s main
-    end
+# 起動時に herdr へアタッチ（herdr 内・VSCode 内では除く）
+if type -q herdr; and test -z "$HERDR_ENV"; and test "$TERM_PROGRAM" != vscode
+    exec herdr
 end
 end
 
