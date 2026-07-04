@@ -52,7 +52,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 
 ## 依存コマンド
 
-`starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `nodenv`, `tmux`, `git-wt`。
+`starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`, `tmux`, `git-wt`。
 
 いずれも `.Brewfile` に含まれる。未インストールでも該当機能が無効になるだけで、致命的には壊れない作りにしてある。
 

@@ -17,8 +17,12 @@ brew "ghq"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
 # Node.js version manager
 brew "nodenv"
+# Search tool that recursively searches directories for a regex pattern, using threads
+brew "ripgrep"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Text interface for Git repositories
