@@ -11,7 +11,7 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
 ## 構成
 
 - **fish** (`.config/fish/`)
-  - `config.fish`: starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動）、git-wt 統合（`git wt --init fish`。`if type -q git-wt` ガード付きで未インストール時は no-op）、起動時の tmux セッション方針（tmux 内・VSCode 内は除外。`main` が他ウィンドウで使用中＝クライアント接続済みなら独立セッション `win-<pid>` を作り、`client-attached` フックで `destroy-unattached on` を貼って閉じたら自動破棄。未使用時は `main` に attach＝無ければ作成）、nodenv 初期化。
+  - `config.fish`: starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動）、起動時の tmux セッション方針（tmux 内・VSCode 内は除外。`main` が他ウィンドウで使用中＝クライアント接続済みなら独立セッション `win-<pid>` を作り、`client-attached` フックで `destroy-unattached on` を貼って閉じたら自動破棄。未使用時は `main` に attach＝無ければ作成）、nodenv 初期化。
   - `conf.d/`: fzf 関連のキーバインド（`fzf_cd_keybind`=Ctrl-O, `fzf_tab_complete`=Tab, `ghq_fzf_keybind`=Ctrl-G）。`config.fish` の `fzf --fish` で定義される widget に bind しているため、読み込み順序に依存する。
   - `functions/`: `ghq_fzf`（ghq リポジトリを fzf 選択して cd）、`ll`/`ls`（eza ラッパ）。
   - プラグインマネージャは使っていない（旧 fisherman 構成は廃止）。
@@ -38,7 +38,7 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
 ## 横断的な約束ごと
 
 - 配色は ghostty テーマ **"Material Design Colors"** に統一されている。fish の `FZF_*` 配色、`.tmux.conf` のステータスライン、`starship.toml` が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 3 箇所を揃える。
-- 依存コマンド: `starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`, `tmux`, `git-wt`。未インストールでも該当機能が無効になるだけで致命的には壊れない作りにしてある。
+- 依存コマンド: `starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`, `tmux`。未インストールでも該当機能が無効になるだけで致命的には壊れない作りにしてある。
 
 ## 注意点
 
