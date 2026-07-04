@@ -1,5 +1,10 @@
 onboarding = false
 
+# prefix は herdr 既定の ctrl+b ではなく ctrl+a を使う（手に馴染んだ割当を維持）。
+# 他の pane/tab/zoom/copy 操作は herdr 既定キー（prefix+v/-/h j k l/z/[ 等）で運用する。
+[keys]
+prefix = "ctrl+a"
+
 [theme]
 name = "solarized"
 auto_switch = false
