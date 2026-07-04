@@ -32,8 +32,26 @@ description = "State-dependent close: pane > tab > workspace, with confirmation"
 command = "sh -c '\"$HOME\"/.config/herdr/scripts/herdr-cmd-w.sh'"
 
 [theme]
-name = "solarized"
+name = "catppuccin"
 auto_switch = false
+
+[theme.custom]
+panel_bg    = "#1d262a"  # bg
+surface_dim = "#1d262a"
+surface0    = "#2a363b"  # FZF bg+
+surface1    = "#435b67"  # border
+overlay0    = "#4e6a78"  # selection
+overlay1    = "#a1b0b8"  # dim
+text        = "#e7ebed"  # fg
+subtext0    = "#a1b0b8"  # dim
+blue        = "#37b6ff"
+green       = "#5cf19e"
+yellow      = "#fed032"
+red         = "#fc3841"
+mauve       = "#fc669b"  # magenta
+teal        = "#59ffd1"  # cyan
+peach       = "#fc746d"
+accent      = "#37b6ff"
 
 [ui.toast]
 delivery = "system"
