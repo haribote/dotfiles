@@ -27,8 +27,6 @@ brew "ripgrep"
 brew "starship"
 # Text interface for Git repositories
 brew "tig"
-# Terminal multiplexer
-brew "tmux"
 cask "font-udev-gothic"
 cask "font-udev-gothic-nf"
 # Terminal emulator that uses platform-native UI and GPU acceleration
