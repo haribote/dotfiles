@@ -1,5 +1,36 @@
 onboarding = false
 
+# prefix は herdr 既定の ctrl+b ではなく ctrl+a を使う（手に馴染んだ割当を維持）。
+# 他の pane/tab/zoom/copy 操作は herdr 既定キー（prefix+v/-/h j k l/z/[ 等）で運用する。
+# 加えて、ghostty の Cmd ショートカットから text: で送出される ctrl+alt+<文字> を
+# 直接バインドとして追加する（配列で prefix+... 側は維持したまま並記）。
+[keys]
+prefix = "ctrl+a"
+
+split_horizontal = ["prefix+minus", "ctrl+alt+t"]
+split_vertical   = ["prefix+v", "ctrl+alt+v"]
+new_tab          = ["prefix+c", "ctrl+alt+o"]
+new_workspace    = ["prefix+shift+n", "ctrl+alt+n"]
+
+cycle_pane_next     = ["prefix+tab", "ctrl+alt+right"]
+cycle_pane_previous = ["prefix+shift+tab", "ctrl+alt+left"]
+next_tab            = ["prefix+n", "ctrl+alt+down"]
+previous_tab        = ["prefix+p", "ctrl+alt+up"]
+next_workspace      = "ctrl+alt+shift+right"
+previous_workspace  = "ctrl+alt+shift+left"
+next_agent          = "ctrl+alt+shift+down"
+previous_agent      = "ctrl+alt+shift+up"
+
+# Cmd+W (ghostty から ctrl+alt+w として届く) は状態依存のクローズ:
+# pane 複数 > pane close / tab 複数 > tab close / それ以外 > workspace close。
+# 各分岐とも y/N 確認を挟む（ghostty 側の close 確認ダイアログはこの text: bridge により
+# Cmd+W では発火しなくなるため、herdr 側の対話ペインで代替する）。
+[[keys.command]]
+key = "ctrl+alt+w"
+type = "pane"
+description = "State-dependent close: pane > tab > workspace, with confirmation"
+command = "sh -c '\"$HOME\"/.config/herdr/scripts/herdr-cmd-w.sh'"
+
 [theme]
 name = "solarized"
 auto_switch = false
