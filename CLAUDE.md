@@ -17,6 +17,7 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
   - プラグインマネージャは使っていない（旧 fisherman 構成は廃止）。
 - **tmux** (`.tmux.conf`): tmux 3.6+ 前提。prefix は Ctrl-a。ghostty 連携のため CSI u 拡張キーや truecolor を明示設定。
 - **ghostty** (`.config/ghostty/config`): フォント `UDEV Gothic NF`、テーマ `Material Design Colors`。Cmd 系キーを tmux のプレフィックスシーケンスに変換するキーバインドを持つ（`.tmux.conf` のバインドと対で機能する）。Cmd 系＝ペイン操作（分割・移動・閉じる）、Cmd+Shift 系＝ウィンドウ操作（新規 `Cmd+N`／前後切替）、`Cmd+Shift+N` のみ ghostty ネイティブの新規ウィンドウ。
+- **herdr** (`.config/herdr/config.toml`): ワークスペース/タブ/ペイン・エージェント管理ツールの設定。テーマ・トースト通知・UI 表示のみ追跡し、セッション状態（`session.json`）とログ（`herdr-server.log`／`herdr-client.log`）は `.gitignore` で除外する。Claude Code の SessionStart フック（`~/.claude/hooks/herdr-agent-state.sh`）と連携してエージェント状態を herdr へ通知する（フック実体は `~/.claude/hooks/` 配下でマシンローカル・追跡外）。
 - **starship** (`.config/starship.toml`): 2 行構成プロンプト。Nerd Font グリフ前提。
 - **tig** (`.tigrc`): git 操作を tig 上で完結させる大量のカスタムキーバインド。差分表示に **delta**、GitHub 連携（`;` `w`）に **gh** を使う。
 - **gh** (`.config/gh/config.yml`): 設定のみ。認証情報 (`hosts.yml`) は `.gitignore` で除外。
