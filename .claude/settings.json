@@ -5,8 +5,6 @@
       "Bash(git diff:*)",
       "Bash(git log:*)",
       "Bash(git show:*)",
-      "Bash(git wt:*)",
-      "Bash(git-wt:*)",
       "Bash(ls:*)",
       "Bash(cat:*)",
       "Bash(rg:*)",

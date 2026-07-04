@@ -29,8 +29,6 @@ brew "starship"
 brew "tig"
 # Terminal multiplexer
 brew "tmux"
-# A Git subcommand that makes `git worktree` simple
-brew "k1low/tap/git-wt"
 cask "font-udev-gothic"
 cask "font-udev-gothic-nf"
 # Terminal emulator that uses platform-native UI and GPU acceleration

@@ -45,11 +45,6 @@ if type -q fzf
     fzf --fish | source
 end
 
-# git-wt シェル統合（`git wt <branch>` での worktree 切替 cd と補完を有効化）
-if type -q git-wt
-    git wt --init fish | source
-end
-
 # 起動時に tmux を自動で立ち上げる（tmux 内・VSCode 内では除く）
 if type -q tmux; and test -z "$TMUX"; and test "$TERM_PROGRAM" != vscode
     # main が既に他のウィンドウで使用中（クライアント接続済み）なら独立した新規セッション、
