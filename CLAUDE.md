@@ -11,12 +11,11 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
 ## 構成
 
 - **fish** (`.config/fish/`)
-  - `config.fish`: starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動）、起動時の tmux セッション方針（tmux 内・VSCode 内は除外。`main` が他ウィンドウで使用中＝クライアント接続済みなら独立セッション `win-<pid>` を作り、`client-attached` フックで `destroy-unattached on` を貼って閉じたら自動破棄。未使用時は `main` に attach＝無ければ作成）、nodenv 初期化。
+  - `config.fish`: starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動）、起動時に herdr へアタッチ（herdr 内・VSCode 内は除外し、`herdr` を attach-or-create で起動）、nodenv 初期化。
   - `conf.d/`: fzf 関連のキーバインド（`fzf_cd_keybind`=Ctrl-O, `fzf_tab_complete`=Tab, `ghq_fzf_keybind`=Ctrl-G）。`config.fish` の `fzf --fish` で定義される widget に bind しているため、読み込み順序に依存する。
   - `functions/`: `ghq_fzf`（ghq リポジトリを fzf 選択して cd）、`ll`/`ls`（eza ラッパ）。
   - プラグインマネージャは使っていない（旧 fisherman 構成は廃止）。
-- **tmux** (`.tmux.conf`): tmux 3.6+ 前提。prefix は Ctrl-a。ghostty 連携のため CSI u 拡張キーや truecolor を明示設定。
-- **ghostty** (`.config/ghostty/config`): フォント `UDEV Gothic NF`、テーマ `Material Design Colors`。Cmd 系キーを tmux のプレフィックスシーケンスに変換するキーバインドを持つ（`.tmux.conf` のバインドと対で機能する）。Cmd 系＝ペイン操作（分割・移動・閉じる）、Cmd+Shift 系＝ウィンドウ操作（新規 `Cmd+N`／前後切替）、`Cmd+Shift+N` のみ ghostty ネイティブの新規ウィンドウ。
+- **ghostty** (`.config/ghostty/config`): フォント `UDEV Gothic NF`、テーマ `Material Design Colors`。pane/tab/zoom/copy 操作は herdr が prefix（`Ctrl+a`）キーで自前処理するため ghostty 側のキー橋渡しは持たない。キーバインドは ghostty ネイティブの `Cmd+Shift+N`（新規ウィンドウ）のみ。
 - **herdr** (`.config/herdr/config.toml`): ワークスペース/タブ/ペイン・エージェント管理ツールの設定。テーマ・トースト通知・UI 表示のみ追跡し、セッション状態（`session.json`）とログ（`herdr-server.log`／`herdr-client.log`）は `.gitignore` で除外する。Claude Code の SessionStart フック（`~/.claude/hooks/herdr-agent-state.sh`）と連携してエージェント状態を herdr へ通知する（フック実体は `~/.claude/hooks/` 配下でマシンローカル・追跡外）。
 - **starship** (`.config/starship.toml`): 2 行構成プロンプト。Nerd Font グリフ前提。
 - **tig** (`.tigrc`): git 操作を tig 上で完結させる大量のカスタムキーバインド。差分表示に **delta**、GitHub 連携（`;` `w`）に **gh** を使う。
@@ -37,8 +36,8 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
 
 ## 横断的な約束ごと
 
-- 配色は ghostty テーマ **"Material Design Colors"** に統一されている。fish の `FZF_*` 配色、`.tmux.conf` のステータスライン、`starship.toml` が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 3 箇所を揃える。
-- 依存コマンド: `starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`, `tmux`。未インストールでも該当機能が無効になるだけで致命的には壊れない作りにしてある。
+- 配色は ghostty テーマ **"Material Design Colors"** に統一されている。fish の `FZF_*` 配色と `starship.toml` が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 2 箇所を揃える。
+- 依存コマンド: `starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`。未インストールでも該当機能が無効になるだけで致命的には壊れない作りにしてある。
 
 ## 注意点
 
