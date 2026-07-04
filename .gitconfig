@@ -3,6 +3,7 @@
 [user]
 	name = KIMURA Tetsuro
 	email = haribote.nobody@gmail.com
+	signingkey = ~/.ssh/id_ed25519.pub
 [core]
 	editor = vi
 	excludesfile = ~/.gitignore_global
@@ -36,6 +37,9 @@
 	enabled = true
 [commit]
 	verbose = true
+	gpgsign = true
+[gpg]
+	format = ssh
 [diff]
 	colorMoved = default
 [branch]
