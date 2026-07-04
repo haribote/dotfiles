@@ -57,7 +57,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 
 ## 配色
 
-ghostty テーマ **"Material Design Colors"** に統一している。fish の `FZF_*` 配色と `starship.toml` が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 2 箇所を揃える。
+ghostty テーマ **"Material Design Colors"** に統一している。fish の `FZF_*` 配色、`starship.toml`、herdr の `.config/herdr/config.toml` の `[theme.custom]` が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 3 箇所を揃える。
 
 ## 注意点
 
