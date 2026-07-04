@@ -38,7 +38,7 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
 ## 横断的な約束ごと
 
 - 配色は ghostty テーマ **"Material Design Colors"** に統一されている。fish の `FZF_*` 配色、`.tmux.conf` のステータスライン、`starship.toml` が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 3 箇所を揃える。
-- 依存コマンド: `starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `nodenv`, `tmux`, `git-wt`。未インストールでも該当機能が無効になるだけで致命的には壊れない作りにしてある。
+- 依存コマンド: `starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`, `tmux`, `git-wt`。未インストールでも該当機能が無効になるだけで致命的には壊れない作りにしてある。
 
 ## 注意点
 
