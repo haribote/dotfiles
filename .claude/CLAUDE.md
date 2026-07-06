@@ -49,3 +49,7 @@
 ## コミット規約
 
 - コミット規約は `commit` skill に従う。
+
+## 文章作成
+
+- 日本語の技術文書（記事・README・解説・PR や issue の説明・設計メモなど）を書く・推敲する規約は `japanese-tech-writing` skill に従う。
