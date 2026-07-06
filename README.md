@@ -18,6 +18,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 | **zsh** | `.zprofile`, `.zshrc` | fish 移行前のログインシェル設定（brew shellenv / PATH のみ）。 |
 | **Homebrew** | `.Brewfile` | インストール済み CLI ツール・GUI アプリ・フォントの一覧（`~/.Brewfile` のミラー）。VS Code 拡張は意図的に含めない。 |
 | **Claude Code** | `.claude/` | グローバル個人設定（`CLAUDE.md`）・エディタ設定（`settings.json`: permissions allowlist・Stop / SessionStart フック・有効プラグイン宣言 `enabledPlugins`）・サブエージェント（`agents/`）・skills（`skills/`）を追跡。プラグインの実体（`~/.claude/plugins/`）や会話ログ・キャッシュ・セッション等のマシン固有/機密データは除外し、settings.json で宣言のみ追跡する。 |
+| **共用 skill** | `.agents/` | クロスエージェント共用 skill（`herdr` / `find-skills`）の実体。`.claude/skills/` からは symlink で参照する。`~/.agents` は本 repo の `.agents` への symlink。インストーラ生成の `.skill-lock.json`（マシン固有）は除外する。 |
 
 ## ブートストラップ（新しい Mac での再現手順）
 
@@ -46,6 +47,10 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
      claude plugin install frontend-design@claude-plugins-official
      claude plugin install superpowers@claude-plugins-official
      ```
+8. クロスエージェント共用 skill を有効化する。`~/.agents` を本 repo の `.agents` への symlink にすると、`.claude/skills/` の `herdr` / `find-skills` symlink が repo 追跡下の実体（`.agents/skills/`）を指す。
+   ```sh
+   ln -s "$(ghq root)/github.com/haribote/dotfiles/.agents" ~/.agents
+   ```
 
 ## 依存コマンド
 
@@ -61,5 +66,6 @@ ghostty テーマ **"Material Design Colors"** に統一している。fish の 
 
 - `.gitignore` で `fish_variables`（fish が生成するマシン固有状態）と `gh/hosts.yml`（認証トークン）を除外している。これらはコミットしない。
 - `~/.claude/plugins/`（プラグインの実体・キャッシュ・`installed_plugins.json` 等）は `.gitignore` 対象でコミットしない。各マシンでブートストラップ手順 7 により取得する。
+- `.agents/.skill-lock.json`（skill インストーラが生成するマシン固有の状態）は `.gitignore` 対象でコミットしない。`.agents/skills/` の実体のみ追跡する。
 - `.gitconfig` の `user.email` は公開用のダミーアドレス。実アドレスを入れない。
 - コミットメッセージは [Conventional Commits](https://www.conventionalcommits.org/) 形式（`<type>(<scope>): <subject>`）に従う。
