@@ -18,7 +18,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 | **zsh** | `.zprofile`, `.zshrc` | fish 移行前のログインシェル設定（brew shellenv / PATH のみ）。 |
 | **Homebrew** | `.Brewfile` | インストール済み CLI ツール・GUI アプリ・フォントの一覧（`~/.Brewfile` のミラー）。VS Code 拡張は意図的に含めない。 |
 | **Claude Code** | `.claude/` | グローバル個人設定（`CLAUDE.md`）・エディタ設定（`settings.json`: permissions allowlist・Stop / SessionStart フック・有効プラグイン宣言 `enabledPlugins`）・サブエージェント（`agents/`）・skills（`skills/`）を追跡。プラグインの実体（`~/.claude/plugins/`）や会話ログ・キャッシュ・セッション等のマシン固有/機密データは除外し、settings.json で宣言のみ追跡する。 |
-| **共用 skill** | `.agents/` | クロスエージェント共用 skill（`herdr` / `find-skills`）の実体。`.claude/skills/` からは symlink で参照する。`~/.agents` は本 repo の `.agents` への symlink。インストーラ生成の `.skill-lock.json`（マシン固有）は除外する。 |
+| **共用 skill** | `.agents/` | クロスエージェント共用 skill（`herdr` / `find-skills`）の実体。`.claude/skills/` からはリポジトリ内相対の symlink（`../../.agents/skills/...`）で参照し、マシン固有の絶対パスを埋め込まない。`~/.agents` も本 repo の `.agents` への symlink にすると、find-skills インストーラや他エージェントが同じ実体を共有する。インストーラ生成の `.skill-lock.json`（マシン固有）は除外する。 |
 
 ## ブートストラップ（新しい Mac での再現手順）
 
@@ -47,7 +47,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
      claude plugin install frontend-design@claude-plugins-official
      claude plugin install superpowers@claude-plugins-official
      ```
-8. クロスエージェント共用 skill を有効化する。`~/.agents` を本 repo の `.agents` への symlink にすると、`.claude/skills/` の `herdr` / `find-skills` symlink が repo 追跡下の実体（`.agents/skills/`）を指す。
+8. （任意）クロスエージェント共用 skill の実体を共有する。`.claude/skills/` の `herdr` / `find-skills` symlink はリポジトリ内相対なので、`~/.claude` を配置した時点で repo 追跡下の実体（`.agents/skills/`）を指し、Claude Code だけならこの手順は不要。find-skills インストーラや他エージェントと同じ実体を共有したい場合は、`~/.agents` を本 repo の `.agents` への symlink にする。
    ```sh
    ln -s "$(ghq root)/github.com/haribote/dotfiles/.agents" ~/.agents
    ```
