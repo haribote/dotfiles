@@ -17,7 +17,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 | **git** | `.gitconfig`, `.gitignore_global` | delta pager・alias 等。`user.email` は公開用ダミー。 |
 | **zsh** | `.zprofile`, `.zshrc` | fish 移行前のログインシェル設定（brew shellenv / PATH のみ）。 |
 | **Homebrew** | `.Brewfile` | インストール済み CLI ツール・GUI アプリ・フォントの一覧（`~/.Brewfile` のミラー）。VS Code 拡張は意図的に含めない。 |
-| **Claude Code** | `.claude/` | グローバル個人設定（`CLAUDE.md`）・エディタ設定（`settings.json`: permissions allowlist・Stop / SessionStart フック・有効プラグイン宣言 `enabledPlugins` とマーケットプレイス宣言 `extraKnownMarketplaces`）・サブエージェント（`agents/`）・skills（`skills/`）を追跡。プラグインの実体（`~/.claude/plugins/`）や会話ログ・キャッシュ・セッション等のマシン固有/機密データは除外し、settings.json で宣言のみ追跡する。 |
+| **Claude Code** | `.claude/` | グローバル個人設定（`CLAUDE.md`）・エディタ設定（`settings.json`: permissions allowlist・Stop / SessionStart フック・有効プラグイン宣言 `enabledPlugins`）・サブエージェント（`agents/`）・skills（`skills/`）を追跡。プラグインの実体（`~/.claude/plugins/`）や会話ログ・キャッシュ・セッション等のマシン固有/機密データは除外し、settings.json で宣言のみ追跡する。 |
 
 ## ブートストラップ（新しい Mac での再現手順）
 
@@ -37,12 +37,10 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
    ```
 6. `gh auth login` で GitHub 認証を行う（`hosts.yml` は追跡していないため各マシンで実施）。
 7. Claude Code のプラグインを導入する。`settings.json` は有効化を宣言するだけで実体（`~/.claude/plugins/`）は追跡していないため、各マシンで取得する。
-   - **対話起動の場合**: `~/.claude/settings.json` 配置後に `claude` を起動すると、公式マーケットプレイス（`claude-plugins-official`）は自動登録され、`context-mode` マーケットプレイスは trust プロンプトで承認すると導入される。
+   - **対話起動の場合**: `~/.claude/settings.json` 配置後に `claude` を起動すると、公式マーケットプレイス（`claude-plugins-official`）が自動登録され、宣言済みプラグインが導入される。
    - **非対話で再現する場合**: 以下を実行する。
      ```sh
      claude plugin marketplace add anthropics/claude-plugins-official
-     claude plugin marketplace add mksglu/context-mode
-     claude plugin install context-mode@context-mode
      claude plugin install skill-creator@claude-plugins-official
      claude plugin install typescript-lsp@claude-plugins-official
      claude plugin install frontend-design@claude-plugins-official
