@@ -27,3 +27,11 @@
 !.claude/skills/japanese-tech-writing/
 !.claude/skills/pr-lifecycle/
 !.claude/skills/typescript-conventions/
+# herdr / find-skills はクロスエージェント共用の .agents/skills に実体を置き、
+# .claude/skills/ からは symlink で参照する。symlink 自体を per-entry で追跡する。
+!.claude/skills/herdr
+!.claude/skills/find-skills
+
+# .agents/skills はクロスエージェント共用 skill の実体（~/.agents は本 repo の .agents への symlink）。
+# skill 実体は追跡し、インストーラが生成するマシン固有の lock だけ除外する。
+.agents/.skill-lock.json
