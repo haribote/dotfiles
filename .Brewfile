@@ -17,11 +17,15 @@ brew "ghq"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Agent multiplexer that lives in your terminal
+brew "herdr"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Node.js version manager
 brew "nodenv"
-# Search tool that recursively searches directories for a regex pattern, using threads
+# Fast, disk space efficient package manager
+brew "pnpm"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Cross-shell prompt for astronauts
 brew "starship"
@@ -29,10 +33,10 @@ brew "starship"
 brew "tig"
 cask "font-udev-gothic"
 cask "font-udev-gothic-nf"
+# OpenAI's official ChatGPT desktop app
+cask "chatgpt"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
-# Control your tools with a few keystrokes
-cask "raycast"
 # Open-source code editor
 cask "visual-studio-code"
 npm "corepack"
