@@ -20,6 +20,8 @@ brew "git-delta"
 brew "herdr"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # Node.js version manager
 brew "nodenv"
 # Fast, disk space efficient package manager
