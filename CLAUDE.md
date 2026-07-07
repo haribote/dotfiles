@@ -17,7 +17,7 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
   - プラグインマネージャは使っていない（旧 fisherman 構成は廃止）。
 - **ghostty** (`.config/ghostty/config`): フォント `UDEV Gothic NF`、テーマ `Material Design Colors`。pane/tab/zoom/copy 操作は herdr が prefix（`Ctrl+a`）キーで自前処理するため ghostty 側のキー橋渡しは基本持たないが、`Cmd+T`/`Cmd+Shift+T`/`Cmd+Option+T`/`Cmd+W` の4つだけ `text:` アクションで herdr へ直接チョードを送出するブリッジを持つ（`.config/herdr/config.toml` の直接バインドと対で機能する）。`Cmd+Shift+N` は ghostty ネイティブの新規ウィンドウ。
 - **herdr** (`.config/herdr/config.toml`): ワークスペース/タブ/ペイン・エージェント管理ツールの設定。prefix は `[keys] prefix = "ctrl+a"` で上書きし、pane/tab/zoom 操作や copy mode（`prefix+[`→`v` 選択→`y` でクリップボードへ）は herdr 既定キーで運用する（split は `new_cwd = "follow"` 既定で親の cwd を継承）。ghostty の Cmd ショートカット橋渡し用の直接チョードと、`Cmd+W` 用の状態依存クローズスクリプト（`.config/herdr/scripts/herdr-cmd-w.sh`）も追加済み。テーマ・トースト通知・UI 表示・キー設定のみ追跡し、セッション状態（`session.json`）とログ（`herdr-server.log`／`herdr-client.log`）は `.gitignore` で除外する。Claude Code の SessionStart フック（`~/.claude/hooks/herdr-agent-state.sh`）と連携してエージェント状態を herdr へ通知する（フック実体は `~/.claude/hooks/` 配下でマシンローカル・追跡外）。
-- **nvim** (`.config/nvim/`): [LazyVim](https://github.com/LazyVim/LazyVim) の [starter](https://github.com/LazyVim/starter) をベースに導入（Neovim >= 0.11.2 が必要）。追跡対象は `init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`（プラグインのバージョン固定）・`stylua.toml`・`.neoconf.json`・`lazyvim.json`（`:LazyExtras` の選択状態・news 既読状態）のみで、starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除済み（追跡しない）。プラグイン実体・parser・キャッシュは `~/.local/share|state|cache/nvim`（repo 外）に置かれ `.config/nvim/` 配下には出ない。pane 間の移動は herdr のキーバインドに一本化し、nvim 側の pane ナビゲーション連携（`herdr.nvim` 等）は入れない。nvim split 内の移動は Vim 既定（`Ctrl-w h/j/k/l`）に任せる。Claude Code との連携も nvim 隣の herdr pane で `claude` を起動する運用のみで、nvim 側プラグインは追加しない。
+- **nvim** (`.config/nvim/`): [LazyVim](https://github.com/LazyVim/LazyVim) の [starter](https://github.com/LazyVim/starter) をベースに導入（Neovim >= 0.11.2 が必要）。追跡対象は `init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`（プラグインのバージョン固定）・`stylua.toml`・`.neoconf.json`・`lazyvim.json`（`:LazyExtras` の選択状態・news 既読状態）・`colors/ghostty-material.lua`（ghostty と同じ配色の colorscheme）のみで、starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除済み（追跡しない）。プラグイン実体・parser・キャッシュは `~/.local/share|state|cache/nvim`（repo 外）に置かれ `.config/nvim/` 配下には出ない。pane 間の移動は herdr のキーバインドに一本化し、nvim 側の pane ナビゲーション連携（`herdr.nvim` 等）は入れない。nvim split 内の移動は Vim 既定（`Ctrl-w h/j/k/l`）に任せる。Claude Code との連携も nvim 隣の herdr pane で `claude` を起動する運用のみで、nvim 側プラグインは追加しない。
 - **starship** (`.config/starship.toml`): 2 行構成プロンプト。Nerd Font グリフ前提。
 - **tig** (`.tigrc`): git 操作を tig 上で完結させる大量のカスタムキーバインド。差分表示に **delta**、GitHub 連携（`;` `w`）に **gh** を使う。
 - **gh** (`.config/gh/config.yml`): 設定のみ。認証情報 (`hosts.yml`) は `.gitignore` で除外。
@@ -37,14 +37,14 @@ macOS 向けの個人 dotfiles。ビルド・テスト・lint の仕組みはな
 1. Homebrew をインストールする。
 2. このリポジトリの各ファイルを `$HOME` 配下の同じパスに配置する（`.Brewfile` → `~/.Brewfile` を含む）。
 3. `brew bundle --global` で `~/.Brewfile` のツール・アプリ・フォントを一括インストールする。
-4. neovim を Brewfile 経由で導入後、LazyVim starter を導入する（`git clone https://github.com/LazyVim/starter ~/.config/nvim` → `rm -rf ~/.config/nvim/.git` → starter 同梱の `README.md`/`LICENSE`/`.gitignore` を削除 → `nvim` を起動し初回の Lazy 同期を待つ）。同期後の `~/.config/nvim` がリポジトリの `.config/nvim/`（`init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json`）と一致することを確認する。
+4. neovim を Brewfile 経由で導入後、LazyVim starter を導入する（`git clone https://github.com/LazyVim/starter ~/.config/nvim` → `rm -rf ~/.config/nvim/.git` → starter 同梱の `README.md`/`LICENSE`/`.gitignore` を削除 → `nvim` を起動し初回の Lazy 同期を待つ）。同期後の `~/.config/nvim` がリポジトリの `.config/nvim/`（`init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json`・`colors/ghostty-material.lua`）と一致することを確認する。
 5. fish をデフォルトシェルにする（`echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells; chsh -s /opt/homebrew/bin/fish`）。
 6. Node は **最新の LTS 版**を nodenv で入れてグローバル既定にする（`nodenv install --list` で最新 LTS を確認 → `nodenv install <version>` → `nodenv global <version>`）。バージョンは固定しない。
 7. `gh auth login` で GitHub 認証を行う（`hosts.yml` は追跡していないため各マシンで実施）。
 
 ## 横断的な約束ごと
 
-- 配色は ghostty テーマ **"Material Design Colors"** に統一されている。fish の `FZF_*` 配色、`starship.toml`、herdr の `.config/herdr/config.toml` の `[theme.custom]` が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 3 箇所を揃える。
+- 配色は ghostty テーマ **"Material Design Colors"** に統一されている。fish の `FZF_*` 配色、`starship.toml`、herdr の `.config/herdr/config.toml` の `[theme.custom]`、nvim の `.config/nvim/colors/ghostty-material.lua`（`mini.base16` で ghostty と同じ 16 色パレットから生成）が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 4 箇所を揃える。
 - 依存コマンド: `starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`, `nvim`。未インストールでも該当機能が無効になるだけで致命的には壊れない作りにしてある。
 
 ## 注意点

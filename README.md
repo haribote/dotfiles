@@ -11,7 +11,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 | **fish** | `.config/fish/` | starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動 / Ctrl-G ghq）、起動時に herdr へアタッチ（herdr 内・VSCode 内は除外）、nodenv 初期化。`conf.d/` に fzf 関連キーバインド、`functions/` に `ghq_fzf` と eza ラッパ（`ll`/`ls`）。プラグインマネージャは未使用。 |
 | **ghostty** | `.config/ghostty/config` | フォント `UDEV Gothic NF`、テーマ `Material Design Colors`。pane/tab/zoom/copy 操作は herdr が prefix（`Ctrl+a`）キーで自前処理するため、ghostty 側のキー橋渡しは持たない。キーバインドは ghostty ネイティブの `Cmd+Shift+N`（新規ウィンドウ）のみ。 |
 | **herdr** | `.config/herdr/config.toml` | ワークスペース/タブ/ペイン・エージェント管理ツールの設定。テーマ・トースト通知・UI 表示のみ追跡。セッション状態（`session.json`）とログ（`*.log`）は `.gitignore` で除外。 |
-| **nvim** | `.config/nvim/` | [LazyVim](https://github.com/LazyVim/LazyVim) の [starter](https://github.com/LazyVim/starter) をベースに導入（Neovim >= 0.11.2 が必要）。追跡対象は `init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json`（`:LazyExtras` の選択状態・news 既読状態）のみで、starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除して追跡しない。プラグイン実体・parser・キャッシュは `~/.local/share|state|cache/nvim`（repo 外）。pane 間の移動は herdr のキーバインドに一本化し、nvim 側の pane ナビゲーション連携は持たない。Claude Code とは隣の herdr pane で `claude` を起動する運用で連携し、nvim 側プラグインは追加しない。 |
+| **nvim** | `.config/nvim/` | [LazyVim](https://github.com/LazyVim/LazyVim) の [starter](https://github.com/LazyVim/starter) をベースに導入（Neovim >= 0.11.2 が必要）。追跡対象は `init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json`（`:LazyExtras` の選択状態・news 既読状態）・`colors/ghostty-material.lua`（ghostty と同じ配色の colorscheme）のみで、starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除して追跡しない。プラグイン実体・parser・キャッシュは `~/.local/share|state|cache/nvim`（repo 外）。pane 間の移動は herdr のキーバインドに一本化し、nvim 側の pane ナビゲーション連携は持たない。Claude Code とは隣の herdr pane で `claude` を起動する運用で連携し、nvim 側プラグインは追加しない。 |
 | **starship** | `.config/starship.toml` | 2 行構成プロンプト。Nerd Font グリフ前提。 |
 | **tig** | `.tigrc` | git 操作を tig 上で完結させるカスタムキーバインド。差分表示に [delta](https://github.com/dandavison/delta)、GitHub 連携に `gh` を使う。 |
 | **gh** | `.config/gh/config.yml` | 設定のみ。認証情報（`hosts.yml`）は `.gitignore` で除外。 |
@@ -32,7 +32,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
    rm -rf ~/.config/nvim/.git
    nvim   # 初回起動で lazy.nvim がプラグインを同期する
    ```
-   同期完了後、`~/.config/nvim` 配下がこのリポジトリの `.config/nvim/`（`init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json`）と一致していることを確認する（starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除する）。C コンパイラ（`nvim-treesitter` 用）は Xcode Command Line Tools で充足するため、未導入なら `xcode-select --install` を先に実行する。
+   同期完了後、`~/.config/nvim` 配下がこのリポジトリの `.config/nvim/`（`init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json`・`colors/ghostty-material.lua`）と一致していることを確認する（starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除する）。C コンパイラ（`nvim-treesitter` 用）は Xcode Command Line Tools で充足するため、未導入なら `xcode-select --install` を先に実行する。
 5. fish をデフォルトシェルにする。
    ```sh
    echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
@@ -68,7 +68,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 
 ## 配色
 
-ghostty テーマ **"Material Design Colors"** に統一している。fish の `FZF_*` 配色、`starship.toml`、herdr の `.config/herdr/config.toml` の `[theme.custom]` が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 3 箇所を揃える。
+ghostty テーマ **"Material Design Colors"** に統一している。fish の `FZF_*` 配色、`starship.toml`、herdr の `.config/herdr/config.toml` の `[theme.custom]`、nvim の `.config/nvim/colors/ghostty-material.lua`（`mini.base16` で ghostty と同じ 16 色パレットから生成）が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 4 箇所を揃える。
 
 ## 注意点
 
