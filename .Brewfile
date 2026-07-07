@@ -37,6 +37,8 @@ cask "font-udev-gothic-nf"
 cask "chatgpt"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Desktop client for GitHub repositories
+cask "github"
 # Open-source code editor
 cask "visual-studio-code"
 npm "corepack"
