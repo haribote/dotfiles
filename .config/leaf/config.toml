@@ -1,0 +1,2 @@
+theme = "material.toml"
+editor = 'nvim +{$line} +"normal! zz"'

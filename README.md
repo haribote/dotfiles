@@ -8,10 +8,11 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 
 | 対象 | パス | 概要 |
 | --- | --- | --- |
-| **fish** | `.config/fish/` | starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動 / Ctrl-G ghq）、起動時に herdr へアタッチ（herdr 内・VSCode 内は除外）、nodenv 初期化。`conf.d/` に fzf 関連キーバインド、`functions/` に `ghq_fzf` と eza ラッパ（`ll`/`ls`）。プラグインマネージャは未使用。 |
+| **fish** | `.config/fish/` | starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動 / Ctrl-G ghq）、起動時に herdr へアタッチ（herdr 内・VSCode 内は除外）、nodenv 初期化。`~/.local/bin` を PATH へ追加し `$EDITOR` に `nvim` を設定。`conf.d/` に fzf 関連キーバインド、`functions/` に `ghq_fzf` と eza ラッパ（`ll`/`ls`）。プラグインマネージャは未使用。 |
 | **ghostty** | `.config/ghostty/config` | フォント `UDEV Gothic NF`、テーマ `Material Design Colors`。pane/tab/zoom/copy 操作は herdr が prefix（`Ctrl+a`）キーで自前処理するため、ghostty 側のキー橋渡しは持たない。キーバインドは ghostty ネイティブの `Cmd+Shift+N`（新規ウィンドウ）のみ。 |
 | **herdr** | `.config/herdr/config.toml` | ワークスペース/タブ/ペイン・エージェント管理ツールの設定。テーマ・トースト通知・UI 表示のみ追跡。セッション状態（`session.json`）とログ（`*.log`）は `.gitignore` で除外。 |
 | **nvim** | `.config/nvim/` | [LazyVim](https://github.com/LazyVim/LazyVim) の [starter](https://github.com/LazyVim/starter) をベースに導入（Neovim >= 0.11.2 が必要）。追跡対象は `init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json`（`:LazyExtras` の選択状態・news 既読状態）・`colors/ghostty-material.lua`（ghostty と同じ配色の colorscheme）のみで、starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除して追跡しない。プラグイン実体・parser・キャッシュは `~/.local/share|state|cache/nvim`（repo 外）。pane 間の移動は herdr のキーバインドに一本化し、nvim 側の pane ナビゲーション連携は持たない。Claude Code とは隣の herdr pane で `claude` を起動する運用で連携し、nvim 側プラグインは追加しない。 |
+| **leaf** | `.config/leaf/` | ターミナル Markdown プレビューア（[RivoLink/leaf](https://github.com/RivoLink/leaf)）。herdr pane で `leaf -w <file>.md` を起動しライブプレビューする運用。`Ctrl+E` で nvim を開き対象行へジャンプ、戻ると自動リロード。brew formula が無いため `install.sh` で `~/.local/bin/leaf` に導入し `.Brewfile` の対象外。 |
 | **starship** | `.config/starship.toml` | 2 行構成プロンプト。Nerd Font グリフ前提。 |
 | **tig** | `.tigrc` | git 操作を tig 上で完結させるカスタムキーバインド。差分表示に [delta](https://github.com/dandavison/delta)、GitHub 連携に `gh` を使う。 |
 | **gh** | `.config/gh/config.yml` | 設定のみ。認証情報（`hosts.yml`）は `.gitignore` で除外。 |
@@ -45,7 +46,12 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
    nodenv global <version>
    ```
 7. `gh auth login` で GitHub 認証を行う（`hosts.yml` は追跡していないため各マシンで実施）。
-8. Claude Code のプラグインを導入する。`settings.json` は有効化を宣言するだけで実体（`~/.claude/plugins/`）は追跡していないため、各マシンで取得する。
+8. leaf を導入する。
+   ```sh
+   curl -fsSL https://raw.githubusercontent.com/RivoLink/leaf/main/scripts/install.sh | sh
+   ```
+   `~/.local/bin/leaf` に配置される（fish の PATH 追加は `config.fish` 側で毎起動行われるため追加設定不要）。
+9. Claude Code のプラグインを導入する。`settings.json` は有効化を宣言するだけで実体（`~/.claude/plugins/`）は追跡していないため、各マシンで取得する。
    - **対話起動の場合**: `~/.claude/settings.json` 配置後に `claude` を起動すると、公式マーケットプレイス（`claude-plugins-official`）が自動登録され、宣言済みプラグインが導入される。
    - **非対話で再現する場合**: 以下を実行する。
      ```sh
@@ -55,20 +61,20 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
      claude plugin install frontend-design@claude-plugins-official
      claude plugin install superpowers@claude-plugins-official
      ```
-9. （任意）クロスエージェント共用 skill の実体を共有する。`.claude/skills/` の `herdr` / `find-skills` symlink はリポジトリ内相対なので、`~/.claude` を配置した時点で repo 追跡下の実体（`.agents/skills/`）を指し、Claude Code だけならこの手順は不要。find-skills インストーラや他エージェントと同じ実体を共有したい場合は、`~/.agents` を本 repo の `.agents` への symlink にする。
+10. （任意）クロスエージェント共用 skill の実体を共有する。`.claude/skills/` の `herdr` / `find-skills` symlink はリポジトリ内相対なので、`~/.claude` を配置した時点で repo 追跡下の実体（`.agents/skills/`）を指し、Claude Code だけならこの手順は不要。find-skills インストーラや他エージェントと同じ実体を共有したい場合は、`~/.agents` を本 repo の `.agents` への symlink にする。
    ```sh
    ln -s "$(ghq root)/github.com/haribote/dotfiles/.agents" ~/.agents
    ```
 
 ## 依存コマンド
 
-`starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`, `nvim`。
+`starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`, `nvim`, `leaf`。
 
-いずれも `.Brewfile` に含まれる。未インストールでも該当機能が無効になるだけで、致命的には壊れない作りにしてある。
+`leaf` 以外は `.Brewfile` に含まれる（`leaf` は brew formula が無いため `install.sh` で導入）。未インストールでも該当機能が無効になるだけで、致命的には壊れない作りにしてある。
 
 ## 配色
 
-ghostty テーマ **"Material Design Colors"** に統一している。fish の `FZF_*` 配色、`starship.toml`、herdr の `.config/herdr/config.toml` の `[theme.custom]`、nvim の `.config/nvim/colors/ghostty-material.lua`（`mini.base16` で ghostty と同じ 16 色パレットから生成）が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 4 箇所を揃える。
+ghostty テーマ **"Material Design Colors"** に統一している。fish の `FZF_*` 配色、`starship.toml`、herdr の `.config/herdr/config.toml` の `[theme.custom]`、nvim の `.config/nvim/colors/ghostty-material.lua`（`mini.base16` で ghostty と同じ 16 色パレットから生成）、leaf の `.config/leaf/material.toml` が同じ HEX 値（例: bg `#1d262a` / 青 `#37b6ff`）を共有しているので、色を変えるときは 5 箇所を揃える。
 
 ## 注意点
 
