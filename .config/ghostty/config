@@ -11,6 +11,7 @@ background-opacity = 0.85
 background-blur = macos-glass-regular
 font-family = "UDEV Gothic NF"
 font-size = 16
+adjust-cell-height = 50%
 
 # Keybinds
 # pane/tab/zoom/copy 操作は herdr が prefix（Ctrl+a）キーで自前処理するため、

@@ -1,2 +1,2 @@
-theme = "material.toml"
+theme = "material-deep-ocean.toml"
 editor = 'nvim +{$line} +"normal! zz"'
