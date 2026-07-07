@@ -25,7 +25,6 @@
 .claude/skills/*
 !.claude/skills/commit/
 !.claude/skills/japanese-tech-writing/
-!.claude/skills/pr-lifecycle/
 !.claude/skills/typescript-conventions/
 # herdr / find-skills はクロスエージェント共用の .agents/skills に実体を置き、
 # .claude/skills/ からは symlink で参照する。symlink 自体を per-entry で追跡する。
