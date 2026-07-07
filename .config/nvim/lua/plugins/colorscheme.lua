@@ -1,7 +1,7 @@
 return {
-  { "nvim-mini/mini.base16", lazy = true },
+  { "marko-cerovac/material.nvim" },
   {
     "LazyVim/LazyVim",
-    opts = { colorscheme = "ghostty-material" },
+    opts = { colorscheme = "material-deep-ocean" },
   },
 }
