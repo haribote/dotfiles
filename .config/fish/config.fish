@@ -4,6 +4,12 @@ if test -x /opt/homebrew/bin/brew
     fish_add_path --path --move --prepend /opt/homebrew/bin /opt/homebrew/sbin
 end
 
+# ~/.local/bin を PATH へ（leaf 等、Homebrew 非管理の単体バイナリの配置先）
+fish_add_path --path --prepend $HOME/.local/bin
+
+# 既定エディタ（leaf の Ctrl+E 等から参照）
+set -gx EDITOR nvim
+
 if status is-interactive
 # Commands to run in interactive sessions can go here
 
