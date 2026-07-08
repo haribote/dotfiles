@@ -9,16 +9,16 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 | 対象 | パス | 概要 |
 | --- | --- | --- |
 | **fish** | `.config/fish/` | starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動 / Ctrl-G ghq）、起動時に herdr へアタッチ（herdr 内・VSCode 内は除外）、nodenv 初期化。`~/.local/bin` を PATH へ追加し `$EDITOR` に `nvim` を設定。`conf.d/` に fzf 関連キーバインド、`functions/` に `ghq_fzf` と eza ラッパ（`ll`/`ls`）。プラグインマネージャは未使用。 |
-| **ghostty** | `.config/ghostty/config` | フォント `UDEV Gothic NF`、テーマ `Material Design Colors`。pane/tab/zoom/copy 操作は herdr が prefix（`Ctrl+a`）キーで自前処理するため、ghostty 側のキー橋渡しは持たない。キーバインドは ghostty ネイティブの `Cmd+Shift+N`（新規ウィンドウ）のみ。 |
-| **herdr** | `.config/herdr/config.toml` | ワークスペース/タブ/ペイン・エージェント管理ツールの設定。テーマ・トースト通知・UI 表示のみ追跡。セッション状態（`session.json`）とログ（`*.log`）は `.gitignore` で除外。 |
-| **nvim** | `.config/nvim/` | [LazyVim](https://github.com/LazyVim/LazyVim) の [starter](https://github.com/LazyVim/starter) をベースに導入（Neovim >= 0.11.2 が必要）。追跡対象は `init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json`（`:LazyExtras` の選択状態・news 既読状態）・`colors/ghostty-material.lua`（ghostty と同じ配色の colorscheme）のみで、starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除して追跡しない。Markdown プレビューは `lang.markdown` extra（render-markdown.nvim）でテーブル・コードブロック・frontmatter をバッファ内装飾し、mermaid は markdown-preview.nvim（`<leader>cp`、ブラウザ表示）で見る。snacks.image による Kitty graphics protocol 経由のインライン描画は herdr pane 内では非対応のため採用していない。プラグイン実体・parser・キャッシュは `~/.local/share|state|cache/nvim`（repo 外）。pane 間の移動は herdr のキーバインドに一本化し、nvim 側の pane ナビゲーション連携は持たない。Claude Code とは隣の herdr pane で `claude` を起動する運用で連携し、nvim 側プラグインは追加しない。 |
+| **ghostty** | `.config/ghostty/config` | フォント `UDEV Gothic NF`、テーマ `Material Design Colors`。pane/tab/zoom/copy 操作は herdr が prefix（`Ctrl+a`）で自前処理するため、ghostty 側のキー橋渡しは基本持たない。例外は `Cmd+T`／`Cmd+Shift+T`／`Cmd+Option+T`／`Cmd+W` の 4 つで、`text:` アクションで固有のバイト列を herdr へ送って split/new_tab/close を起動する（herdr 側の直接バインドと対で機能する）。`Cmd+Shift+N` は ghostty ネイティブの新規ウィンドウ。 |
+| **herdr** | `.config/herdr/config.toml` | ワークスペース/タブ/ペイン・エージェント管理ツールの設定。prefix は `Ctrl+a`。pane/tab/zoom と copy mode（`prefix+[`→`v`→`y`）は herdr 既定キーで運用する。ghostty の `Cmd+*` ブリッジを受ける直接バインドと、`Cmd+W` 用の状態依存クローズスクリプトを持つ。追跡するのはテーマ・トースト通知・UI 表示・キー設定のみ。セッション状態（`session.json`）とログ（`*.log`）は `.gitignore` で除外。Claude Code の SessionStart フックと連携してエージェント状態を herdr へ通知する。 |
+| **nvim** | `.config/nvim/` | [LazyVim](https://github.com/LazyVim/LazyVim) の [starter](https://github.com/LazyVim/starter) をベースに導入（Neovim >= 0.11.2 が必要）。追跡対象は `init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json` のみ。starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除して追跡しない。colorscheme は material.nvim の "Deep Ocean"（`lua/plugins/colorscheme.lua`、ghostty とは独立）。有効な `:LazyExtras` は `lang.typescript`・`lang.markdown`・`formatting.prettier`・`lang.json`・`lang.yaml`・`lang.tailwind`・`lang.docker`・`lang.git`・`test.core`・`ai.claudecode`。Markdown プレビューは `lang.markdown`（render-markdown.nvim）でバッファ内装飾し、mermaid は markdown-preview.nvim（`<leader>cp`、ブラウザ表示）で見る。テストランナーは `test.core` に neotest-vitest adapter を追加。Claude Code とは `ai.claudecode` extra の claudecode.nvim（WebSocket 連携、キーは `<leader>a*`）で連携する。snacks.image の Kitty graphics inline 描画は herdr pane 非対応のため使わない。プラグイン実体・parser・キャッシュは repo 外（`~/.local/share|state|cache/nvim`）。pane 間の移動は herdr のキーバインドに一本化し、nvim 側の pane ナビゲーション連携は持たない。 |
 | **starship** | `.config/starship.toml` | 2 行構成プロンプト。Nerd Font グリフ前提。 |
 | **tig** | `.tigrc` | git 操作を tig 上で完結させるカスタムキーバインド。差分表示に [delta](https://github.com/dandavison/delta)、GitHub 連携に `gh` を使う。 |
 | **gh** | `.config/gh/config.yml` | 設定のみ。認証情報（`hosts.yml`）は `.gitignore` で除外。 |
 | **git** | `.gitconfig`, `.gitignore_global` | delta pager・alias 等。`user.email` は公開用ダミー。 |
 | **zsh** | `.zprofile`, `.zshrc` | fish 移行前のログインシェル設定（brew shellenv / PATH のみ）。 |
-| **Homebrew** | `.Brewfile` | インストール済み CLI ツール・GUI アプリ・フォントの一覧（`~/.Brewfile` のミラー）。VS Code 拡張は意図的に含めない。 |
-| **Claude Code** | `.claude/` | グローバル個人設定（`CLAUDE.md`）・エディタ設定（`settings.json`: permissions allowlist・Stop / SessionStart フック・有効プラグイン宣言 `enabledPlugins`）・サブエージェント（`agents/`）・skills（`skills/`）を追跡。プラグインの実体（`~/.claude/plugins/`）や会話ログ・キャッシュ・セッション等のマシン固有/機密データは除外し、settings.json で宣言のみ追跡する。 |
+| **Homebrew** | `.Brewfile` | インストール済み CLI ツール・GUI アプリ・フォントの一覧（`~/.Brewfile` のミラー）。`brew bundle dump --describe --no-vscode` で再生成する。VS Code 拡張は意図的に含めない。 |
+| **Claude Code** | `.claude/` | グローバル個人設定（`CLAUDE.md`）・エディタ設定（`settings.json`: permissions allowlist・SessionStart フック・有効プラグイン宣言 `enabledPlugins`）・サブエージェント（`agents/`）・skills（`skills/`）を追跡。プラグインの実体（`~/.claude/plugins/`）や会話ログ・キャッシュ・セッション等のマシン固有/機密データは除外し、settings.json で宣言のみ追跡する。 |
 | **共用 skill** | `.agents/` | クロスエージェント共用 skill（`herdr` / `find-skills`）の実体。`.claude/skills/` からはリポジトリ内相対の symlink（`../../.agents/skills/...`）で参照し、マシン固有の絶対パスを埋め込まない。`~/.agents` も本 repo の `.agents` への symlink にすると、find-skills インストーラや他エージェントが同じ実体を共有する。インストーラ生成の `.skill-lock.json`（マシン固有）は除外する。 |
 
 ## ブートストラップ（新しい Mac での再現手順）
@@ -32,7 +32,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
    rm -rf ~/.config/nvim/.git
    nvim   # 初回起動で lazy.nvim がプラグインを同期する
    ```
-   同期完了後、`~/.config/nvim` 配下がこのリポジトリの `.config/nvim/`（`init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json`・`colors/ghostty-material.lua`）と一致していることを確認する（starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除する）。C コンパイラ（`nvim-treesitter` 用）は Xcode Command Line Tools で充足するため、未導入なら `xcode-select --install` を先に実行する。
+   同期完了後、`~/.config/nvim` 配下がこのリポジトリの `.config/nvim/`（`init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json`）と一致していることを確認する（starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除する）。C コンパイラ（`nvim-treesitter` 用）は Xcode Command Line Tools で充足するため、未導入なら `xcode-select --install` を先に実行する。
 5. fish をデフォルトシェルにする。
    ```sh
    echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
@@ -73,7 +73,8 @@ ghostty テーマ **"Material Design Colors"** に統一している。fish の 
 ## 注意点
 
 - `.gitignore` で `fish_variables`（fish が生成するマシン固有状態）と `gh/hosts.yml`（認証トークン）を除外している。これらはコミットしない。
-- `~/.claude/plugins/`（プラグインの実体・キャッシュ・`installed_plugins.json` 等）は `.gitignore` 対象でコミットしない。各マシンでブートストラップ手順 7 により取得する。
+- `.claude/settings.json` は追跡対象だが、Claude Code の `/model` コマンドが書き込む `model` キーはマシン/セッション固有なのでコミットしない。
+- `~/.claude/plugins/`（プラグインの実体・キャッシュ・`installed_plugins.json` 等）は `.gitignore` 対象でコミットしない。各マシンでブートストラップ手順 8 により取得する。
 - `.agents/.skill-lock.json`（skill インストーラが生成するマシン固有の状態）は `.gitignore` 対象でコミットしない。`.agents/skills/` の実体のみ追跡する。
 - `.gitconfig` の `user.email` は公開用のダミーアドレス。実アドレスを入れない。
 - コミットメッセージは [Conventional Commits](https://www.conventionalcommits.org/) 形式（`<type>(<scope>): <subject>`）に従う。
