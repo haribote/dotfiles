@@ -18,8 +18,12 @@ brew "git"
 brew "git-delta"
 # Agent multiplexer that lives in your terminal
 brew "herdr"
+# Tools and libraries to manipulate images in select formats
+brew "imagemagick"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# CLI for Mermaid library
+brew "mermaid-cli"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Node.js version manager
