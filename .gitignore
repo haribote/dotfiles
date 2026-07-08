@@ -7,6 +7,7 @@
 # herdr が生成するマシン固有のセッション状態・ログ（config.toml のみ管理）
 .config/herdr/session.json
 .config/herdr/*.log
+.config/herdr/release-notes.json
 
 # ツールが生成する update-check キャッシュ（マシン固有・追跡不要）
 .config/configstore/
