@@ -11,7 +11,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 | **fish** | `.config/fish/` | starship プロンプト初期化、fzf シェル統合（Ctrl-R 履歴 / Ctrl-T ファイル / Ctrl-O ディレクトリ移動 / Ctrl-G ghq）、起動時に herdr へアタッチ（herdr 内・VSCode 内は除外）、nodenv 初期化。`~/.local/bin` を PATH へ追加し `$EDITOR` に `nvim` を設定。`conf.d/` に fzf 関連キーバインド、`functions/` に `ghq_fzf` と eza ラッパ（`ll`/`ls`）。プラグインマネージャは未使用。 |
 | **ghostty** | `.config/ghostty/config` | フォント `UDEV Gothic NF`、テーマ `Material Design Colors`。pane/tab/zoom/copy 操作は herdr が prefix（`Ctrl+a`）キーで自前処理するため、ghostty 側のキー橋渡しは持たない。キーバインドは ghostty ネイティブの `Cmd+Shift+N`（新規ウィンドウ）のみ。 |
 | **herdr** | `.config/herdr/config.toml` | ワークスペース/タブ/ペイン・エージェント管理ツールの設定。テーマ・トースト通知・UI 表示のみ追跡。セッション状態（`session.json`）とログ（`*.log`）は `.gitignore` で除外。 |
-| **nvim** | `.config/nvim/` | [LazyVim](https://github.com/LazyVim/LazyVim) の [starter](https://github.com/LazyVim/starter) をベースに導入（Neovim >= 0.11.2 が必要）。追跡対象は `init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json`（`:LazyExtras` の選択状態・news 既読状態）・`colors/ghostty-material.lua`（ghostty と同じ配色の colorscheme）のみで、starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除して追跡しない。Markdown プレビューは `lang.markdown` extra（render-markdown.nvim）と snacks.image（mermaid のインライン描画）でバッファ内完結し、非対応端末では markdown-preview.nvim（`<leader>cp`）にフォールバックする。プラグイン実体・parser・キャッシュは `~/.local/share|state|cache/nvim`（repo 外）。pane 間の移動は herdr のキーバインドに一本化し、nvim 側の pane ナビゲーション連携は持たない。Claude Code とは隣の herdr pane で `claude` を起動する運用で連携し、nvim 側プラグインは追加しない。 |
+| **nvim** | `.config/nvim/` | [LazyVim](https://github.com/LazyVim/LazyVim) の [starter](https://github.com/LazyVim/starter) をベースに導入（Neovim >= 0.11.2 が必要）。追跡対象は `init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json`（`:LazyExtras` の選択状態・news 既読状態）・`colors/ghostty-material.lua`（ghostty と同じ配色の colorscheme）のみで、starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除して追跡しない。Markdown プレビューは `lang.markdown` extra（render-markdown.nvim）でテーブル・コードブロック・frontmatter をバッファ内装飾し、mermaid は markdown-preview.nvim（`<leader>cp`、ブラウザ表示）で見る。snacks.image による Kitty graphics protocol 経由のインライン描画は herdr pane 内では非対応のため採用していない。プラグイン実体・parser・キャッシュは `~/.local/share|state|cache/nvim`（repo 外）。pane 間の移動は herdr のキーバインドに一本化し、nvim 側の pane ナビゲーション連携は持たない。Claude Code とは隣の herdr pane で `claude` を起動する運用で連携し、nvim 側プラグインは追加しない。 |
 | **starship** | `.config/starship.toml` | 2 行構成プロンプト。Nerd Font グリフ前提。 |
 | **tig** | `.tigrc` | git 操作を tig 上で完結させるカスタムキーバインド。差分表示に [delta](https://github.com/dandavison/delta)、GitHub 連携に `gh` を使う。 |
 | **gh** | `.config/gh/config.yml` | 設定のみ。認証情報（`hosts.yml`）は `.gitignore` で除外。 |
@@ -62,7 +62,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 
 ## 依存コマンド
 
-`starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`, `nvim`, `mmdc`（mermaid-cli）, `magick`（imagemagick）。
+`starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`, `nvim`。
 
 全て `.Brewfile` に含まれる。未インストールでも該当機能が無効になるだけで、致命的には壊れない作りにしてある。
 
