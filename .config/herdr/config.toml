@@ -54,8 +54,12 @@ peach       = "#fc746d"
 accent      = "#37b6ff"
 
 [ui.toast]
-delivery = "system"
+delivery = "terminal"
 
 [ui]
 show_agent_labels_on_pane_borders = false
 agent_panel_sort = "spaces"
+
+[advanced]
+advanced.scrollback_limit_bytes = 50000000
+
