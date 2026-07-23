@@ -14,19 +14,6 @@ font-size = 16
 adjust-cell-height = 50%
 
 # Keybinds
-# pane/tab/zoom/copy 操作は herdr が prefix（Ctrl+a）キーで自前処理するため、
-# 基本は ghostty 側の Cmd 橋渡しを持たない。ただし以下の4つだけ、
-# text: アクションで一意な ctrl+alt+<文字> の生バイト列を herdr へ送出し、
-# herdr 側の直接バインド（.config/herdr/config.toml 参照）で受ける。
-# Cmd+T        : ctrl+alt+t を送出 -> herdr split_horizontal
-# Cmd+Shift+T  : ctrl+alt+v を送出 -> herdr split_vertical
-# Cmd+Option+T : ctrl+alt+o を送出 -> herdr new_tab
-# Cmd+W        : ctrl+alt+w を送出 -> herdr の状態依存クローズスクリプト
-#                (.config/herdr/scripts/herdr-cmd-w.sh、pane>tab>workspace の順に確認の上クローズ)
-# Cmd+N/Cmd+Shift+N はブリッジしない。ghostty はプロセス条件分岐ができないため、
-# 「herdr 非稼働時は新規ウィンドウにフォールバック」は素の new_window のままで満たす。
-keybind = cmd+shift+n=new_window
-keybind = cmd+t=text:\x1b\x14
-keybind = cmd+shift+t=text:\x1b\x16
-keybind = cmd+alt+t=text:\x1b\x0f
-keybind = cmd+w=text:\x1b\x17
+# pane/tab の操作は herdr の prefix（Ctrl+a）に一本化するため、
+# ghostty 側の Cmd ブリッジ（text: で ctrl+alt+<文字> を送出する類）は持たない。
+# Cmd 系は ghostty 既定のまま（Cmd+T=new_tab, Cmd+W=close_surface, Cmd+N=new_window）。
