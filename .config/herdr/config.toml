@@ -15,9 +15,15 @@ command = "fish"
 width = "70%"
 height = "60%"
 
+# カレントペインの右に、ワークスペース幅の 26% で Claude Code を開く。
+[[keys.command]]
+key = "prefix+a"
+type = "shell"
+description = "Open Claude Code to the right at 26% of the workspace width"
+command = "sh -c '\"$HOME\"/.config/herdr/scripts/herdr-claude-pane.sh'"
+
 [theme]
 name = "catppuccin"
-auto_switch = false
 
 [theme.custom]
 panel_bg    = "#1d262a"  # bg
@@ -37,12 +43,11 @@ teal        = "#59ffd1"  # cyan
 peach       = "#fc746d"
 accent      = "#37b6ff"
 
+[ui]
+show_agent_labels_on_pane_borders = true
+
 [ui.toast]
 delivery = "terminal"
-
-[ui]
-show_agent_labels_on_pane_borders = false
-agent_panel_sort = "spaces"
 
 [advanced]
 scrollback_limit_bytes = 50000000
