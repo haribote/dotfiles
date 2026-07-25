@@ -51,7 +51,7 @@ FROM=ja
 TO=en
 jq -n --arg text "$TEXT" --arg from "$FROM" --arg to "$TO" \
   '{text: $text, from: $from, to: $to}' |
-curl -Nsf -H 'Content-Type: application/json' --data-binary @- \
+curl -NsS --fail-with-body -H 'Content-Type: application/json' --data-binary @- \
   http://localhost:11435/translate > "$OUT"
 ```
 
@@ -71,6 +71,9 @@ jq -j 'select(.delta) | .delta' "$OUT"
    - `{"done":true,...}` があれば成功。delta を連結した全文が訳文である。
    - `{"error":...}` があれば失敗。`message` を添えてその旨を伝える。訳文は不完全なので提示しない。
    - `done` も `error` も無いままストリームが切れていたら、接続断として扱う。もう一度張り直す。
+
+   ストリームが始まる前に失敗した場合も、`$OUT` にエラーの body が入る。
+   `{"error":...}` として同じように扱えばよい。
 
 ```bash
 # Mac — 判定

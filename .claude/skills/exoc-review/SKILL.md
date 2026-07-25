@@ -38,7 +38,7 @@ root=$(git rev-parse --show-toplevel)
 tmp=$(mktemp -d)
 tar --no-mac-metadata -czf "$tmp/snapshot.tgz" -C "$root" \
   --null -T <(git -C "$root" ls-files -z --cached --others --exclude-standard) .git
-curl -sf \
+curl -sS --fail-with-body \
   -F 'params={"language":"typescript"}' \
   -F "snapshot=@$tmp/snapshot.tgz;type=application/gzip" \
   http://localhost:11435/review
@@ -57,7 +57,13 @@ pkill -f "11435:127.0.0.1:11435"
 idle が続くと WSL の VM ごと落ちるため、手順 2 の先頭で起こしている。
 それでも失敗する場合は `ssh exocortex "wsl -l -v"` で `Running` を確認してから張り直す。
 
-`413` が返ったら差分が大きすぎる。
-`base` を近いコミットにするなどで対象を絞る。
+レビューが失敗したときは、`curl` が本文を出すのでそれを読んで伝える。
+
+- `413 context_too_large`：差分が大きすぎる。`base` を近いコミットにするなどで対象を絞る
+- `502 invalid_model_output`：モデルが schema に合う JSON を返さなかった。大きな入力で起きやすい。対象を絞って再試行する
+- `504 inference_timeout`：推論が 300 秒に収まらなかった。同じく対象を絞る
+
+いずれも入力を小さくすると通ることが多い。
+サーバーが入力に確保する上限は 20480 トークンで、思考の分を差し引いた残りである。
 
 トンネルを閉じ忘れたときは `pkill -f "11435:127.0.0.1:11435"` で閉じる。
