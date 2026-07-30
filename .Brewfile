@@ -20,6 +20,8 @@ brew "git-delta"
 brew "herdr"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Simple terminal UI for git commands
+brew "lazygit"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Node.js version manager
@@ -30,8 +32,6 @@ brew "pnpm"
 brew "ripgrep"
 # Cross-shell prompt for astronauts
 brew "starship"
-# Text interface for Git repositories
-brew "tig"
 cask "font-udev-gothic"
 cask "font-udev-gothic-nf"
 # OpenAI's official ChatGPT desktop app

@@ -6,6 +6,9 @@ onboarding = false
 [keys]
 prefix = "ctrl+a"
 
+# 既定の goto (session navigator) を prefix+m (move) へ退避し、prefix+g を lazygit popup に空ける。
+goto = "prefix+m"
+
 # tab レイアウトを崩さずに一時作業用の fish を開く。
 [[keys.command]]
 key = "prefix+space"
@@ -21,6 +24,15 @@ key = "prefix+a"
 type = "shell"
 description = "Open Claude Code to the right at 26% of the workspace width"
 command = "sh -c '\"$HOME\"/.config/herdr/scripts/herdr-claude-pane.sh'"
+
+# tab レイアウトを崩さずに lazygit を開く。
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+description = "lazygit in a popup"
+command = "lazygit"
+width = "80%"
+height = "80%"
 
 [theme]
 name = "catppuccin"

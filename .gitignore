@@ -38,3 +38,7 @@
 # .agents/skills はクロスエージェント共用 skill の実体（~/.agents は本 repo の .agents への symlink）。
 # skill 実体は追跡し、インストーラが生成するマシン固有の lock だけ除外する。
 .agents/.skill-lock.json
+
+# lazygit が生成するマシン固有の実行時状態（最近開いたリポジトリ、PR キャッシュ等）。
+# config.yml のみ管理する。
+Library/Application Support/lazygit/state.yml
