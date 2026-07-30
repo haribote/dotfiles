@@ -13,7 +13,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 | **herdr** | `.config/herdr/config.toml` | ワークスペース/タブ/ペイン・エージェント管理ツールの設定。prefix は `Ctrl+a`。pane/tab/zoom と copy mode（`prefix+[`→`v`→`y`）は herdr 既定キーで運用し、既定と同じ割当は設定に書かない。独自のキーは 2 つで、`prefix+space` は `fish` を popup で開き（70% x 60%）、`prefix+a` はカレントペインの右にワークスペース幅の 26% で Claude Code を開く（`scripts/herdr-claude-pane.sh`）。追跡するのはテーマ・トースト通知・UI 表示・キー設定とスクリプトのみ。セッション状態（`session.json`）とログ（`*.log`）は `.gitignore` で除外。Claude Code の SessionStart フックと連携してエージェント状態を herdr へ通知する。 |
 | **nvim** | `.config/nvim/` | [LazyVim](https://github.com/LazyVim/LazyVim) の [starter](https://github.com/LazyVim/starter) をベースに導入（Neovim >= 0.11.2 が必要）。追跡対象は `init.lua`・`lua/config/*`・`lua/plugins/*`・`lazy-lock.json`・`stylua.toml`・`.neoconf.json`・`lazyvim.json` のみ。starter 同梱の `README.md`/`LICENSE`/`.gitignore` は削除して追跡しない。colorscheme は material.nvim の "Deep Ocean"（`lua/plugins/colorscheme.lua`、ghostty とは独立）。有効な `:LazyExtras` は `lang.typescript`・`lang.markdown`・`formatting.prettier`・`lang.json`・`lang.yaml`・`lang.tailwind`・`lang.docker`・`lang.git`・`test.core`・`ai.claudecode`。Markdown プレビューは `lang.markdown`（render-markdown.nvim）でバッファ内装飾し、mermaid は markdown-preview.nvim（`<leader>cp`、ブラウザ表示）で見る。テストランナーは `test.core` に neotest-vitest adapter を追加。Claude Code とは `ai.claudecode` extra の claudecode.nvim（WebSocket 連携、キーは `<leader>a*`）で連携する。snacks.image の Kitty graphics inline 描画は herdr pane 非対応のため使わない。プラグイン実体・parser・キャッシュは repo 外（`~/.local/share|state|cache/nvim`）。pane 間の移動は herdr のキーバインドに一本化し、nvim 側の pane ナビゲーション連携は持たない。 |
 | **starship** | `.config/starship.toml` | 2 行構成プロンプト。Nerd Font グリフ前提。 |
-| **tig** | `.tigrc` | git 操作を tig 上で完結させるカスタムキーバインド。差分表示に [delta](https://github.com/dandavison/delta)、GitHub 連携に `gh` を使う。 |
+| **lazygit** | 設定ファイルなし（既定設定） | git 操作を lazygit 上で完結させる TUI。git worktree の一覧・作成・切り替え・削除を標準の worktree ビューでサポートする。差分表示は `.gitconfig` の delta pager 設定を継承し、GitHub 連携（PR 作成）は `gh` 検出時に標準キーバインドで有効になる。 |
 | **gh** | `.config/gh/config.yml` | 設定のみ。認証情報（`hosts.yml`）は `.gitignore` で除外。 |
 | **git** | `.gitconfig`, `.gitignore_global` | delta pager・alias 等。`user.email` は公開用ダミー。 |
 | **zsh** | `.zprofile`, `.zshrc` | fish 移行前のログインシェル設定（brew shellenv / PATH のみ）。 |
@@ -62,7 +62,7 @@ macOS 向けの個人 dotfiles。リポジトリのルートを `$HOME` のミ�
 
 ## 依存コマンド
 
-`starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`, `nvim`。
+`starship`, `fzf`, `fd`, `eza`, `bat`, `delta`, `gh`, `ghq`, `jq`, `nodenv`, `rg`, `nvim`, `lazygit`。
 
 全て `.Brewfile` に含まれる。未インストールでも該当機能が無効になるだけで、致命的には壊れない作りにしてある。
 
