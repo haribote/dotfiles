@@ -41,4 +41,4 @@
 
 # lazygit が生成するマシン固有の実行時状態（最近開いたリポジトリ、PR キャッシュ等）。
 # config.yml のみ管理する。
-Library/Application Support/lazygit/state.yml
+.config/lazygit/state.yml
