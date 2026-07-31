@@ -10,6 +10,9 @@ fish_add_path --path --prepend $HOME/.local/bin
 # 既定エディタ
 set -gx EDITOR nvim
 
+# lazygit の設定を ~/.config 配下に統一（macOS の既定は ~/Library/Application Support）
+set -gx CONFIG_DIR "$HOME/.config/lazygit"
+
 if status is-interactive
 # Commands to run in interactive sessions can go here
 
