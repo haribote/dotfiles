@@ -7,10 +7,11 @@ herdr の skill 文書（`herdr --skill` / 同梱の skill 定義）に書かれ
 「この tab の新しい pane」ではなく、**新しい workspace**（独立した tab 群）を作る。pane/tab ID ではなく workspace ID が新規発行される。
 
 ```bash
-herdr worktree create --workspace <ID> --branch <name> --base main --label "<label>" --no-focus
+herdr worktree create --workspace <ID> --branch <name> --base main --path .claude/worktree/<worktree-name> --label "<label>" --no-focus
 ```
 
 - `--workspace <ID>` と `--cwd <PATH>` は排他。両方渡すと `Exit code 2` になる。
+- `--path` は必ず指定する。省略すると herdr のデフォルト位置に作られ、Claude Code 自身が worktree を作るときのディレクトリ規則（リポジトリ直下の `.claude/worktree/<worktree-name>`）とズレる。
 - 戻り値の JSON に `result.root_pane.pane_id` と `result.workspace.workspace_id` が入っている。以降の `herdr pane` / `herdr agent` 呼び出しには `pane_id` を使う。
 - ユーザーが「今の tab に pane を追加して」のように指示していた場合、実際の挙動（workspace 単位の分離）と食い違う。一度確認を取ってから進めるのが安全（AskUserQuestion で選択肢を示すとよい）。手動で「同じ tab 内の pane」にしたい場合は、`git worktree add` を自分で実行してから `herdr pane split --direction right|down` で pane を追加する代替手順がある。
 
