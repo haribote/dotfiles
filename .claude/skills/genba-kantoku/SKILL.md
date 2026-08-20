@@ -50,8 +50,8 @@ herdr を使い、lead-agent（このセッション）が複数の helper-agent
 
 各 Wave で、並行させるサブタスクの数だけ以下を行う。**並行実行するため、複数の Bash 呼び出しを同一メッセージ内で発行する**（順に1つずつ呼ぶと並行にならない）。
 
-1. **worktree 作成**：`herdr worktree create --workspace <ID> --branch <branch-name> --base main --path .claude/worktree/<worktree-name> --label "<label>" --no-focus`
-   - `--path` は Claude Code 自身が worktree を作る際と同じディレクトリ規則（リポジトリ直下の `.claude/worktree/<worktree-name>`）に揃える。省略しない。
+1. **worktree 作成**：`herdr worktree create --workspace <ID> --branch <branch-name> --base main --path .claude/worktrees/<worktree-name> --label "<label>" --no-focus`
+   - `--path` は Claude Code 自身が worktree を作る際と同じディレクトリ規則（リポジトリ直下の `.claude/worktrees/<worktree-name>`）に揃える。省略しない。
    - 重要な注意点は `references/herdr-gotchas.md` を参照。特に、これは「今の tab の新しい pane」ではなく**新しい workspace**を作る。ユーザーが特定の見た目（同一 tab 内の pane）を指示していた場合は、実際の挙動が異なることを一度確認する。
 2. **依存関係インストール**：`herdr pane run <PANE> "npm ci"`（プロジェクトに応じたコマンドに置き換える）→ `herdr pane wait-output <PANE> --regex "<完了を示す正規表現>" --timeout 180000` で完了を待つ。
 3. **helper-agent 起動**：`herdr agent start <name> --kind claude --pane <PANE> -- --permission-mode auto --model claude-sonnet-5`
