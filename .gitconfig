@@ -59,3 +59,9 @@
 	last = log -1 HEAD --stat
 	unstage = restore --staged
 	amend = commit --amend --no-edit
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
