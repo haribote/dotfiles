@@ -57,10 +57,20 @@ accent      = "#37b6ff"
 
 [ui]
 show_agent_labels_on_pane_borders = true
+agent_panel_sort = "spaces"
+status_indicators = "symbols"
+window_title = "{workspace}: {tab}"
+hide_tab_bar_when_single_tab = true
 
 [ui.toast]
 delivery = "terminal"
 
+# 日本語 IME が ON でも prefix が効くようにし、Claude Code の入力中は候補ウィンドウをカーソルに追従させる。
+[experimental]
+switch_ascii_input_source_in_prefix = true
+reveal_hidden_cursor_for_cjk_ime = true
+cjk_ime_agents = ["claude"]
+pane_history = true
+
 [advanced]
 scrollback_limit_bytes = 50000000
-
