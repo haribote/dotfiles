@@ -29,6 +29,7 @@
 !.claude/skills/exoc-translate/
 !.claude/skills/genba-kantoku/
 !.claude/skills/japanese-tech-writing/
+!.claude/skills/memory-inventory/
 !.claude/skills/tewake/
 !.claude/skills/typescript-conventions/
 # herdr / find-skills はクロスエージェント共用の .agents/skills に実体を置き、
